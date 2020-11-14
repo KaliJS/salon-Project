@@ -138,7 +138,16 @@ Route::get('/salon-uses', [InventorySalonUsesController::class, 'index']);
 
 Route::get('/retail-products', [InventoryRetailProductsController::class, 'index']);
 
-Route::get('/staff', [StaffController::class, 'index']);
+
+/********************* Staff Start *******************/
+
+Route::resource('/staff', StaffController::class);
+Route::get('/staff/editStaff/{id}', [StaffController::class, 'editStaff']);
+Route::post('/staff/updateStaff/{id}', [StaffController::class, 'updateStaff']);
+Route::post('/staff/destroyStaff/{id}', [StaffController::class, 'destroyStaff']);
+
+/********************* Staff End ************************/
+
 //skills
 Route::resource('/staff-skills', StaffSkillsController::class);
 Route::get('/staff-skills/editSkill/{id}', [StaffSkillsController::class, 'editSkill']);
