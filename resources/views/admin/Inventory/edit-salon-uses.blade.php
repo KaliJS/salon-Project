@@ -1,0 +1,78 @@
+@extends('layouts.admin')
+
+@section('content')
+
+		
+            <!--/app header--> 
+            <!--Page header-->
+            <div class="page-header">
+              <div class="page-leftheader">
+                <h4 class="page-title mb-0">Hi! Welcome Back</h4>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#"><i class="angle fa fa-angle-right mr-2"></i>Salon Uses</a></li>
+                  <li class="breadcrumb-item"><a href="#"><i class="angle fa fa-angle-right mr-2"></i>Edit Salon Uses</a></li>
+                  
+                </ol>
+              </div>
+              
+            </div>
+            <!--End Page header-->
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Update Salon Uses</h3>
+                  </div>
+                  <div class="card-body p-6">
+
+                          <div class="card-body">
+                          <form class="form-horizontal" action="{{ url('admin/salon-uses/updateSalonUse/'.$salonUse->id) }}" method="POST">
+                            @csrf
+
+                            <div class="form-group row ">
+                              <label class="col-md-3 form-label">Product</label>
+                              <div class="col-md-9">
+                                <select class="form-control"  tabindex="-1" aria-hidden="true" name="product_id">
+                                  <option selected disabled>Select</option>
+                                  @foreach($products as $product)
+                                    <option value="{{$product->id}}" {{$product->id==$salonUse->product_id?"selected":""}}>{{$product->description}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+
+                            
+
+                            <div class="form-group row">
+                              <label for="inputName" class="col-md-3 form-label">In Stock</label>
+                              <div class="col-md-9">
+                                <input type="text" value="{{$salonUse->in_stock}}" class="form-control" id="inputDesignation" placeholder="In Stock" name="in_stock">
+                              </div>
+                            </div>
+                            
+                           
+
+                            <div class="form-group mb-0 mt-4 row justify-content-end">
+                              <div class="col-md-9">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         
+
+
+
+          </div>
+        </div>
+
+@stop
+  

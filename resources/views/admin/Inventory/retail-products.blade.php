@@ -28,7 +28,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ url('inventory/create-retail-product') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Retail Product</a>
+                        <a href="{{ route('retail-products.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Retail Product</a>
                       </div>
                       
                     </div>
@@ -50,67 +50,37 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>
+                         @foreach ($retailProducts as $retailProduct)
+                            <tr>
+                              
+                              
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->idh_no}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->hsn}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->brand->name}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->category->name}}</td>
+                              
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->genric->name}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->product->description}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->mrp_price}}</td>
+                              <td class="text-nowrap align-middle">{{$retailProduct->slp_price}}</td>
+                              
+                              <td class="text-nowrap align-middle">{{$retailProduct->in_stock}}</td>
+                              <td>
                                 <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('inventory/edit-retail-product') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
+                                    <a class="dropdown-item" href="{{ url('/admin/retail-products/editRetailProduct/'.$retailProduct->id) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ url('/admin/retail-products/destroyRetailProduct/'.$retailProduct->id) }}" method="POST">
+                                  
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
                                   </div>
                                 </div>
                               </td>
-                        </tr>
-                        
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('inventory/edit-retail-product') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('inventory/edit-retail-product') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                        </tr>
+                              
+                            </tr>
+                            @endforeach
                       </tbody>
                     </table>
                   </div>

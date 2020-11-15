@@ -19,7 +19,7 @@
             <!--End Page header-->
             
           
-         <div class="row">
+          <div class="row">
               <div class="col-md-12 col-lg-12">
                 <div class="card">
                   <div class="card-header">
@@ -28,7 +28,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ url('inventory/create-salon-uses') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Salon Uses</a>
+                        <a href="{{ route('salon-uses.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Salon Uses Product</a>
                       </div>
                       
                     </div>
@@ -43,41 +43,41 @@
                           <th>Category</th>
                           <th>Generic Name</th>
                           <th>Product Discription</th>
+                          
                           <th>In Stock</th>
+                          <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
-                        
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
+                         @foreach ($salonUses as $salonUse)
+                            <tr>
+                              
+                              <td class="text-nowrap align-middle">{{$salonUse->product->idh_no}}</td>
+                              <td class="text-nowrap align-middle">{{$salonUse->product->hsn}}</td>
+                              <td class="text-nowrap align-middle">{{$salonUse->product->brand->name}}</td>
+                              <td class="text-nowrap align-middle">{{$salonUse->product->category->name}}</td>
+                              
+                              <td class="text-nowrap align-middle">{{$salonUse->product->genric->name}}</td>
+                              <td class="text-nowrap align-middle">{{$salonUse->product->description}}</td>
+                              
+                              <td class="text-nowrap align-middle">{{$salonUse->in_stock}}</td>
+                             
+
+                              <td>
+                                <div class="btn-group">
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="{{ url('/admin/salon-uses/editSalonUse/'.$salonUse->id) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ url('/admin/salon-uses/destroySalonUse/'.$salonUse->id) }}" method="POST">
+                                  
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -86,6 +86,7 @@
                 </div>
                 </div>
               </div>
+
 
 
 

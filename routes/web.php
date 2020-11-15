@@ -134,9 +134,23 @@ Route::get('/products-genrics/editGenric/{id}', [ProductsGenricController::class
 Route::post('/products-genrics/updateGenric/{id}', [ProductsGenricController::class, 'updateGenric']);
 Route::post('/products-genrics/destroyGenric/{id}', [ProductsGenricController::class, 'destroyGenric']);
 
-Route::get('/salon-uses', [InventorySalonUsesController::class, 'index']);
 
-Route::get('/retail-products', [InventoryRetailProductsController::class, 'index']);
+/*************************Start Salon-Uses********************/
+
+Route::resource('/salon-uses', InventorySalonUsesController::class);
+Route::get('/salon-uses/editSalonUse/{id}', [InventorySalonUsesController::class, 'editSalonUse']);
+Route::post('/salon-uses/updateSalonUse/{id}', [InventorySalonUsesController::class, 'updateSalonUse']);
+Route::post('/salon-uses/destroySalonUse/{id}', [InventorySalonUsesController::class, 'destroySalonUse']);
+
+/*************************End Salon-Uses****************salon-uses
+
+/*********************Start Retail-Products*****************/
+Route::resource('/retail-products', InventoryRetailProductsController::class);
+Route::get('/retail-products/editRetailProduct/{id}', [InventoryRetailProductsController::class, 'editRetailProduct']);
+Route::post('/retail-products/updateRetailProduct/{id}', [InventoryRetailProductsController::class, 'updateRetailProduct']);
+Route::post('/retail-products/destroyRetailProduct/{id}', [InventoryRetailProductsController::class, 'destroyRetailProduct']);
+
+/*********************End Retail-Products********************/
 
 
 /********************* Staff Start *******************/

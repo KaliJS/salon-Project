@@ -18,99 +18,55 @@
             </div>
             <!--End Page header-->
             
-            <!-- Row-1 -->
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">Create Salon Uses</h4>
+                    <h3 class="card-title">Add Salon Uses Products</h3>
                   </div>
-                  <div class="card-body">
-                    <form class="form-horizontal">
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">IDH No</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputName" placeholder="IDH No">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">HSN</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="phone" placeholder="HSN">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputEmail3" class="col-md-3 form-label">Brand</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Brand">
-                        </div>
-                      </div>
-                      
-                      <div class="form-group row ">
-                        <label class="col-md-3 form-label">Category</label>
-                        <div class="col-md-9">
-                          <select class="form-control " tabindex="-1" aria-hidden="true">
-                            <option>cat1</option>
-                            <option>cat2</option>
-                            <option>cat3</option>
+                  <div class="card-body p-6">
+
+                          <div class="card-body">
+                          <form class="form-horizontal" action="{{ route('salon-uses.store') }}" method="POST">
+                            @csrf
+
+                            <div class="form-group row ">
+                              <label class="col-md-3 form-label">Product</label>
+                              <div class="col-md-9">
+                                <select class="form-control"  tabindex="-1" aria-hidden="true" name="product_id">
+                                  <option selected disabled>Select</option>
+                                  @foreach($products as $product)
+                                  <option value="{{$product->id}}" {{$product->id==Request::old('product_id')?"selected":""}}>{{$product->description}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+
                             
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group row ">
-                        <label class="col-md-3 form-label">Genric Name</label>
-                        <div class="col-md-9">
-                          <select class="form-control " tabindex="-1" aria-hidden="true">
-                            <option>gen1</option>
-                            <option>gen2</option>
-                            <option>gen3</option>
+
+                            <div class="form-group row">
+                              <label for="inputName" class="col-md-3 form-label">IN Stock</label>
+                              <div class="col-md-9">
+                                <input type="number" value="{{Request::old('in_stock')}}" class="form-control" id="inputDesignation" placeholder="In Stock" name="in_stock">
+                              </div>
+                            </div>
                             
-                          </select>
+                           
+
+                            <div class="form-group mb-0 mt-4 row justify-content-end">
+                              <div class="col-md-9">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                
+                              </div>
+                            </div>
+                          </form>
                         </div>
-                      </div>
                       
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">Product Description</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputDesignation" placeholder="Product Description">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">MRP</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputEmplyeeId" placeholder="MRP">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">SLP</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputEmplyeeId" placeholder="SLP">
-                        </div>
-                      </div>
-                      <div class="form-group row ">
-                        <label class="col-md-3 form-label">In Stock</label>
-                        <div class="col-md-9">
-                          <select class="form-control " tabindex="-1" aria-hidden="true">
-                            <option>Yes</option>
-                            <option>No</option>
-                            
-                          </select>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group mb-0 mt-4 row justify-content-end">
-                        <div class="col-md-9">
-                          <button type="submit" class="btn btn-primary">Create</button>
-                          
-                        </div>
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>
-            
             </div>
-            <!-- End Row-1 -->
+
 
          
 

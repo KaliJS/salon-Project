@@ -20,7 +20,7 @@ class StaffController extends Controller
     public function index()
     {
         try{
-            $staff = Staff::where('branch_id',Auth::user()->branch_id)->orderBy('id')->get();
+            $staff = Staff::where('branch_id',Auth::user()->branch_id)->orderBy('id')->with('skills')->get();
             return $staff;
             // return view('admin.Products.products',compact('products'));
             
