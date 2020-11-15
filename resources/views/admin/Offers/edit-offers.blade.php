@@ -26,40 +26,44 @@
                     <h4 class="card-title">Update Offers</h4>
                   </div>
                   <div class="card-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="{{ route('offers.update',$offer) }}" method="POST">
+                      @method('PUT')
+                      @csrf
                       <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">Offer Name</label>
+                        <label for="inputName"  class="col-md-3 form-label">Offer Name</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputName" placeholder="Offer Name">
+                          <input type="text" value="{{$offer->name}}" class="form-control" id="inputDesignation" placeholder="Name" name="name">
                         </div>
                       </div>
-                      
                       <div class="form-group row">
-                        <label for="inputEmail3" class="col-md-3 form-label">Discription</label>
+                        <label for="inputName" class="col-md-3 form-label">Description</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputService" placeholder="Discription">
+                          <input type="text" value="{{$offer->description}}" class="form-control" id="inputDesignation" placeholder="Description" name="description">
                         </div>
                       </div>
-                      
-                      <div class="form-group row">
-                        <label for="inputPassword3" class="col-md-3 form-label">Services</label>
+
+                      <div class="form-group row ">
+                        <label class="col-md-3 form-label">Services</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputPassword3" placeholder="Services">
+                          <select multiple class="form-control"  tabindex="-1" aria-hidden="true" name="services[]">
+                            @foreach($services as $service)
+                            <option value="{{$service->id}}" {{in_array($service->id,$selected_services)?"selected":""}}>{{$service->service_description}}</option>
+                            @endforeach
+                          </select>
                         </div>
                       </div>
-                      
-                      
+
                       <div class="form-group row">
                         <label for="inputName" class="col-md-3 form-label">Discount Percentage</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputNote" placeholder="Discount Percentage">
+                          <input type="number" value="{{$offer->discount_percentage}}" class="form-control" id="inputDesignation" placeholder="Discount Percentage" name="discount_percentage">
                         </div>
                       </div>
                      
                       <div class="form-group mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
                           <button type="submit" class="btn btn-primary">Update</button>
-                          
+
                         </div>
                       </div>
                     </form>

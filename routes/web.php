@@ -62,7 +62,7 @@ Route::get('/covid',function(){
 	return view('users.covid');
 });
 
-Route::resource('contact', ContactUsController::class);
+Route::resource('/contact', ContactUsController::class);
 
 Auth::routes();
 
@@ -70,21 +70,26 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::prefix('admin')->group(function () {
     
-Route::resource('dashboard', DashboardController::class);
-Route::resource('customers', CustomersController::class);
-Route::get('/todays-appointment', [TodaysAppointmentController::class, 'index']);
+Route::resource('/dashboard', DashboardController::class);
+Route::resource('/customers', CustomersController::class);
+Route::resource('/todays-appointment', TodaysAppointmentController::class);
 
-Route::get('/dashboard-user', [DashboardUserController::class, 'index']);
+Route::resource('/dashboard-user', DashboardUserController::class);
 
-Route::get('appointments', [AppointmentsController::class, 'index']);
+Route::resource('/appointments', AppointmentsController::class);
 
-Route::get('/sales-invoices', [SalesInvoicesController::class, 'index']);
-Route::get('/sales-purchases', [SalesPurchasesController::class, 'index']);
+Route::resource('/sales-invoices', SalesInvoicesController::class);
+
+/******************Start Purchases*******************/
+
+Route::resource('/sales-purchases', SalesPurchasesController::class);
+
+/********************End Purchases********************/
 
 
 
 //users or customers
-Route::resource('users', CustomersController::class);
+Route::resource('/users', CustomersController::class);
 Route::get('/editCustomer/{id}', [CustomersController::class, 'editCustomer']);
 Route::post('/updateCustomer/{id}', [CustomersController::class, 'updateCustomer']);
 Route::post('/destroyCustomer/{id}', [CustomersController::class, 'destroyCustomer']);
@@ -156,9 +161,6 @@ Route::post('/retail-products/destroyRetailProduct/{id}', [InventoryRetailProduc
 /********************* Staff Start *******************/
 
 Route::resource('/staff', StaffController::class);
-Route::get('/staff/editStaff/{id}', [StaffController::class, 'editStaff']);
-Route::post('/staff/updateStaff/{id}', [StaffController::class, 'updateStaff']);
-Route::post('/staff/destroyStaff/{id}', [StaffController::class, 'destroyStaff']);
 
 /********************* Staff End ************************/
 
@@ -174,10 +176,14 @@ Route::get('/staff-designation/editDesignation/{id}', [StaffDesignationControlle
 Route::post('/staff-designation/updateDesignation/{id}', [StaffDesignationController::class, 'updateDesignation']);
 Route::post('/staff-designation/destroyDesignation/{id}', [StaffDesignationController::class, 'destroyDesignation']);
 
-Route::get('/offers', [OffersController::class, 'index']);
-Route::get('/editOffer/{id}', [OffersController::class, 'editOffer']);
-Route::get('/updateOffer/{id}', [OffersController::class, 'updateOffer']);
-Route::get('/destroyOffer/{id}', [OffersController::class, 'destroyOffer']);
+
+
+/******************Start Offer******************/
+
+Route::resource('/offers', OffersController::class);
+
+/*******************End Offer*******************/
+
 
 
 });

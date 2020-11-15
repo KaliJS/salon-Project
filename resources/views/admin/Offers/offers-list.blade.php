@@ -53,18 +53,24 @@
                               
                               <td class="text-nowrap align-middle"><span class="font-weight-bold">{{$offer->name}}</span></td>
                               <td class="text-nowrap align-middle"><span>{{$offer->description}}</span></td>
-                              <td class="text-nowrap align-middle"><span>{{$offer->services}}</span></td>
-                              <td class="text-nowrap align-middle"><span>{{$offer->discount}}</span></td>
+                              <td>
+                              @foreach($offer->services as $service)
+                                    <span class="btn btn-primary">
+                                        {{$service->service_description}}
+                                    </span>
+                                @endforeach
+                              </td>
+                              <td class="text-nowrap align-middle"><span>{{$offer->discount_percentage}}</span></td>
                               
                               
                               
                               <td>
                                 <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('/editOffer/'.$offer->id) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <form action="{{ url('/destroyOffer/'.$offer->id) }}" method="POST">
-                                  
+                                    <a class="dropdown-item" href="{{ route('offers.edit',$offer) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ route('offers.destroy',$offer) }}" method="POST">
+                                      @method('DELETE')
                                       @csrf
                                       <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
                                     </form>

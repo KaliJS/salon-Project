@@ -26,7 +26,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ url('sales/create-purchase') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Purchase</a>
+                        <a href="{{ route('sales-purchases.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Purchase</a>
                       </div>
                       
                     </div>
@@ -47,108 +47,40 @@
                             </tr>
                           </thead>
                           <tbody>
+                            @foreach ($purchases as $purchase)
                             <tr>
+
+                              <td class="text-nowrap align-middle">{{$purchase->seller_name}}</td>
+                              <td class="text-nowrap align-middle">{{$purchase->address}}</td>
+                              <td class="text-nowrap align-middle">{{$purchase->phone}}</td>
+                              <td class="text-nowrap align-middle">
+                                @foreach($purchase->products as $product)
+                                    <span class="btn btn-primary">
+                                        {{$product->description}}
+                                    </span>
+                                @endforeach
+                              </td>
+                              <td class="text-nowrap align-middle">{{$purchase->quantity}}</td>
+                              <td class="text-nowrap align-middle">{{$purchase->price}}</td>
+                              <td class="text-nowrap align-middle">{{$purchase->cgst}}</td>
+                              <td class="text-nowrap align-middle">{{$purchase->sgst}}</td>
                               
                               
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
                               <td>
                                 <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('sales/edit-purchase') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
+                                    <a class="dropdown-item" href="{{ route('sales-purchases.edit',$purchase) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ route('sales-purchases.destroy',$purchase) }}" method="POST">
+                                      @method('DELETE')
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
                                   </div>
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              
-                              
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('sales/edit-purchase') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash mr-2"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              
-                              
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('sales/edit-purchase') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash mr-2"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
+                            @endforeach
                             
                           </tbody>
                         </table>

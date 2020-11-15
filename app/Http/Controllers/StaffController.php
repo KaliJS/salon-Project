@@ -9,6 +9,7 @@ use App\Models\StaffSkills;
 use Illuminate\Http\Request;
 use Redirect;
 use Auth;
+use DB;
 
 class StaffController extends Controller
 {
@@ -20,10 +21,11 @@ class StaffController extends Controller
     public function index()
     {
         try{
-            $staff = Staff::where('branch_id',Auth::user()->branch_id)->orderBy('id')->with('skills')->get();
-            return $staff;
-            // return view('admin.Products.products',compact('products'));
-            
+            $staff = Staff::where('branch_id',Auth::user()->branch_id)->with('skills',function($q){
+                $q->select('name');
+            })->orderBy('id')->get();
+            return view('admin.Staff Management.staff-list',compact('staff'));
+
         }catch(\Exception $e){
             return Redirect::back()->with('error',$e->getMessage());
         }
@@ -39,7 +41,7 @@ class StaffController extends Controller
         try{
             $skills = StaffSkills::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
-            
+
             return view('admin.Staff Management.create-staff',compact('skills','designations'));
 
         }catch(\Exception $e){
@@ -65,26 +67,27 @@ class StaffController extends Controller
             'doj' => 'required'
         ]);
 
-        \DB::beginTransaction();
+        DB::beginTransaction();
         try{
 
             $skills=$request->skills;
             $input=$request->all();
             unset($input['skills']);
-            $input['branch_id']=\Auth::user()->id;
+            $input['branch_id']=Auth::user()->id;
             $inserted_staff=Staff::create($input);
+            $data=[];
             foreach($skills as $skill){
-                $data=array('branch_id'=>$input['branch_id'],'skill_id'=>$skill,'staff_id'=>$inserted_staff->id,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s"),'deleted_at'=>null);
-                $inserted_skill=\DB::table('staffs_skills')->insert($data);
+                $data[]=array('branch_id'=>$input['branch_id'],'skill_id'=>$skill,'staff_id'=>$inserted_staff->id,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s"),'deleted_at'=>null);
             }
+            $inserted_skill=DB::table('staffs_skills')->insert($data);
 
-            \DB::commit();
+            DB::commit();
 
             return redirect()->back()
                 ->with('success', 'Staff created successfully.');
 
         }catch(\Exception $e){
-            \DB::rollback();
+            DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }
@@ -108,7 +111,16 @@ class StaffController extends Controller
      */
     public function edit(Staff $staff)
     {
-        //
+        try{
+
+            $skills = StaffSkills::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $selected_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->pluck('skill_id')->toArray();
+            return view('admin.Staff Management.edit-staff',compact('staff','skills','designations','selected_skills'));
+
+        }catch(Exception $e){
+            return Redirect::back()->with('error',$e->getMessage());
+        }
     }
 
     /**
@@ -120,7 +132,41 @@ class StaffController extends Controller
      */
     public function update(Request $request, Staff $staff)
     {
-        //
+        $request->validate([
+            'email' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'designation_id' => 'required',
+            'employee_id' => 'required',
+            'phone' => 'required',
+            'doj' => 'required'
+        ]);
+
+        DB::beginTransaction();
+        try{
+
+            $skills=$request->skills;
+            $input=$request->all();
+            unset($input['skills']);
+            unset($input['_method']);
+            unset($input['_token']);
+            $branch_id=Auth::user()->branch_id;
+            $updated_staff=Staff::where('id',$staff->id)->update($input);
+            $deleted_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->delete();
+            foreach($skills as $skill){
+                $data[]=array('branch_id'=>$branch_id,'skill_id'=>$skill,'staff_id'=>$staff->id,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s"),'deleted_at'=>null);
+            }
+            $inserted_skill=DB::table('staffs_skills')->insert($data);
+
+            DB::commit();
+
+            return redirect()->back()
+                ->with('success', 'Staff updated successfully.');
+
+        }catch(\Exception $e){
+            DB::rollback();
+            return Redirect::back()->with('error',$e->getMessage());
+        }
     }
 
     /**
@@ -131,6 +177,16 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
-        //
+        DB::beginTransaction();
+        try{
+            DB::table('staffs_skills')->where('staff_id',$staff->id)->delete();
+            $staff->delete();
+            DB::commit();
+            return redirect()->back()
+                ->with('success', 'Staff deleted successfully.');
+        }catch(\Exception $e){
+            DB::rollback();
+            return Redirect::back()->with('error',$e->getMessage());
+        }
     }
 }

@@ -26,43 +26,49 @@
                     <h4 class="card-title">Create Offers</h4>
                   </div>
                   <div class="card-body">
-                    <form class="form-horizontal">
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">Offer Name</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputName" placeholder="Offer Name">
-                        </div>
-                      </div>
-                      
-                      <div class="form-group row">
-                        <label for="inputEmail3" class="col-md-3 form-label">Discription</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputService" placeholder="Discription">
-                        </div>
-                      </div>
-                      
-                      <div class="form-group row">
-                        <label for="inputPassword3" class="col-md-3 form-label">Services</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputPassword3" placeholder="Services">
-                        </div>
-                      </div>
-                      
-                      
-                      <div class="form-group row">
-                        <label for="inputName" class="col-md-3 form-label">Discount Percentage</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputNote" placeholder="Discount Percentage">
-                        </div>
-                      </div>
-                     
-                      <div class="form-group mb-0 mt-4 row justify-content-end">
-                        <div class="col-md-9">
-                          <button type="submit" class="btn btn-primary">Create</button>
-                          
-                        </div>
-                      </div>
-                    </form>
+                    
+                    <form class="form-horizontal" action="{{ route('offers.store') }}" method="POST">
+                            @csrf
+                            <div class="form-group row">
+                              <label for="inputName"  class="col-md-3 form-label">Offer Name</label>
+                              <div class="col-md-9">
+                                <input type="text" value="{{Request::old('name')}}" class="form-control" id="inputDesignation" placeholder="Name" name="name">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="inputName" class="col-md-3 form-label">Description</label>
+                              <div class="col-md-9">
+                                <input type="text" value="{{Request::old('description')}}" class="form-control" id="inputDesignation" placeholder="Description" name="description">
+                              </div>
+                            </div>
+
+                            <div class="form-group row ">
+                              <label class="col-md-3 form-label">Services</label>
+                              <div class="col-md-9">
+                                <select multiple class="form-control"  tabindex="-1" aria-hidden="true" name="services[]">
+                                  @foreach($services as $service)
+                                  <option value="{{$service->id}}" {{$service->id==Request::old('service_id')?"selected":""}}>{{$service->service_description}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="inputName" class="col-md-3 form-label">Discount Percentage</label>
+                              <div class="col-md-9">
+                                <input type="number" value="{{Request::old('discount_percentage')}}" class="form-control" id="inputDesignation" placeholder="Discount Percentage" name="discount_percentage">
+                              </div>
+                            </div>
+                            
+
+                            <div class="form-group mb-0 mt-4 row justify-content-end">
+                              <div class="col-md-9">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                
+                              </div>
+                            </div>
+                          </form>
+
                   </div>
                 </div>
               </div>
