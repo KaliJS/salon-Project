@@ -25,6 +25,6 @@ class Staff extends Model
     }
 
     public function skills(){
-    	return $this->belongsToMany('App\Models\StaffSkills','staffs_skills','staff_id','skill_id');
+    	return $this->belongsToMany('App\Models\Services','staffs_skills','staff_id','skill_id');
     }
 }

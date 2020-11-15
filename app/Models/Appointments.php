@@ -4,29 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointments extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'appointments';
-    public $timestamps = true;
 
-    protected $casts = [
-        'cost' => 'float'
-    ];
+    protected $guarded = ["id"];
 
-    protected $fillable = [
-        'id',
-        'customer_id',
-        'service_id',
-        'date',
-        'time',
-        'staff_id',
-        'status',
-        'branch_id',
-        'created_at',
-        'updated_at',
-        'deleted_at'
-								
-    ];
+    public function customer(){
+        return $this->hasOne('App\Models\Customers','id','customer_id');
+    }
+
+    public function staff(){
+        return $this->hasOne('App\Models\Staff','id','staff_id');
+    }
+
+    public function services(){
+        return $this->belongsToMany('App\Models\Services','appointments_services','appointment_id','service_id');
+    }
 }

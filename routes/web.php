@@ -164,6 +164,16 @@ Route::resource('/staff', StaffController::class);
 
 /********************* Staff End ************************/
 
+
+/********************* Appointments Start ***************/
+
+Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
+Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
+Route::post('/appointments/getServiceData',[AppointmentsController::class,'getServiceData']);
+Route::resource('/appointments', AppointmentsController::class);
+
+/********************* Appointments End ***************/
+
 //skills
 Route::resource('/staff-skills', StaffSkillsController::class);
 Route::get('/staff-skills/editSkill/{id}', [StaffSkillsController::class, 'editSkill']);

@@ -2,7 +2,7 @@
 <!-- saved from url=(0067)Vertical-IconSidedar-Light/index -->
 <html lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta data -->
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta content="Admitro - Laravel Bootstrap Admin Template" name="description">
     <meta content="Spruko Technologies Private Limited" name="author">
@@ -40,7 +40,7 @@
 
       <!-- Color Skin css -->
     <link id="theme" href="{{asset('css/color1.css')}}" rel="stylesheet" type="text/css">
-    
+
     <!-- Switcher css -->
     <link rel="stylesheet" href="{{asset('css/switcher.css')}}">
     <link rel="stylesheet" href="{{asset('css/demo.css')}}">
@@ -651,11 +651,15 @@
   width: 200%;
   height: 200%;
 }
+
+.hidden{
+    display:none;
+}
 </style><style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;box-sizing: content-box;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><script async="" type="text/javascript" src="{{asset('js/fingerprint2.min.js')}}"></script></head>
-
+@yield('css')
   <body class="app sidebar-mini">
-  
+
     <!-- Start Switcher -->
     <div class="switcher-wrapper">
       <div class="demo_changer" style="right: -255px;">
@@ -747,7 +751,7 @@
       </div>
     </div>
     <!-- End Switcher -->
-    
+
     <!---Global-loader-->
     <div id="global-loader" style="display: none;">
       <img src="{{asset('users/images/loader.svg')}}" alt="loader">
@@ -767,7 +771,7 @@
 
 
         <!--aside closed-->
-        <!-- App-Content -->  
+        <!-- App-Content -->
 
 
         <div>
@@ -790,7 +794,7 @@
           </div>
           @yield('content')
         </div>
-        
+
 
 
 
@@ -801,11 +805,11 @@
 
 
             <!--Footer-->
-      
+
         @include('includes.footer')
 
 
-      <!-- End Footer-->    
+      <!-- End Footer-->
     </div>
     <!-- End Page -->
       <!-- Back to top -->
@@ -829,13 +833,13 @@
 
     <!--Sidemenu js-->
     <script src="{{asset('js/sidemenu.js')}}"></script>
-    
+
     <!-- P-scroll js-->
     <script src="{{asset('js/p-scrollbar.js')}}"></script>
     <script src="{{asset('js/p-scroll1.js')}}"></script>
     <script src="{{asset('js/p-scroll.js')}}"></script>
 
-    
+
 <!--INTERNAL Peitychart js-->
 <!-- <script src="{{asset('js/jquery.peity.min.js')}}"></script> -->
 <!-- <script src="{{asset('js/peitychart.init.js')}}"></script> -->
@@ -863,7 +867,7 @@
     <script src="{{asset('js/custom.js')}}"></script>
 
     <!-- Switcher js-->
-    <script src="{{asset('js/switcher.js')}}"></script>      
+    <script src="{{asset('js/switcher.js')}}"></script>
 
     <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
         <defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M-1 60L-1 60C-1 60 10.652173913043478 60 10.652173913043478 60C10.652173913043478 60 21.304347826086957 60 21.304347826086957 60C21.304347826086957 60 31.956521739130434 60 31.956521739130434 60C31.956521739130434 60 42.608695652173914 60 42.608695652173914 60C42.608695652173914 60 53.26086956521739 60 53.26086956521739 60C53.26086956521739 60 63.91304347826087 60 63.91304347826087 60C63.91304347826087 60 74.56521739130434 60 74.56521739130434 60C74.56521739130434 60 85.21739130434783 60 85.21739130434783 60C85.21739130434783 60 95.8695652173913 60 95.8695652173913 60C95.8695652173913 60 106.52173913043478 60 106.52173913043478 60C106.52173913043478 60 117.17391304347827 60 117.17391304347827 60C117.17391304347827 60 127.82608695652173 60 127.82608695652173 60C127.82608695652173 60 138.47826086956522 60 138.47826086956522 60C138.47826086956522 60 149.1304347826087 60 149.1304347826087 60C149.1304347826087 60 159.78260869565216 60 159.78260869565216 60C159.78260869565216 60 170.43478260869566 60 170.43478260869566 60C170.43478260869566 60 181.08695652173913 60 181.08695652173913 60C181.08695652173913 60 191.7391304347826 60 191.7391304347826 60C191.7391304347826 60 202.3913043478261 60 202.3913043478261 60C202.3913043478261 60 213.04347826086956 60 213.04347826086956 60C213.04347826086956 60 223.69565217391303 60 223.69565217391303 60C223.69565217391303 60 234.34782608695653 60 234.34782608695653 60C234.34782608695653 60 245 60 245 60C245 60 245 60 245 60 "></path></svg>
@@ -885,6 +889,7 @@
           $('select').select2();
       });
     </script>
+    @yield('js')
 </body>
 </html>
 

@@ -39,7 +39,7 @@ class StaffController extends Controller
     public function create()
     {
         try{
-            $skills = StaffSkills::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
 
             return view('admin.Staff Management.create-staff',compact('skills','designations'));
@@ -113,7 +113,7 @@ class StaffController extends Controller
     {
         try{
 
-            $skills = StaffSkills::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $selected_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->pluck('skill_id')->toArray();
             return view('admin.Staff Management.edit-staff',compact('staff','skills','designations','selected_skills'));
