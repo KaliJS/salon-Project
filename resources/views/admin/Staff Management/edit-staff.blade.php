@@ -68,7 +68,7 @@
                         <div class="col-md-9">
                           <select multiple class="form-control"  tabindex="-1" aria-hidden="true" name="skills[]">
                             @foreach($skills as $skill)
-                            <option value="{{$skill->id}}" {{in_array($skill->id,$selected_skills)?"selected":""}}>{{$skill->name}}</option>
+                            <option value="{{$skill->id}}" {{in_array($skill->id,$selected_skills)?"selected":""}}>{{$skill->service_description}}</option>
                             @endforeach
                           </select>
                         </div>

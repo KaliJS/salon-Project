@@ -1,3 +1,6 @@
+@php
+$permissions=Auth::user()->permissions->pluck('permission')->toArray();
+@endphp
 <aside class="app-sidebar ps ps--active-y">
           <div class="app-sidebar__logo">
             <a class="header-brand" href="Vertical-IconSidedar-Light/index">
@@ -29,6 +32,7 @@
             </li>
            
 
+            @if(in_array("dashboard-user",$permissions))
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="#">
               <i class="fa fa-dashboard side-menu__icon p-0"></i>
@@ -37,6 +41,9 @@
                 <li><a href="{{ url('/admin/dashboard-user') }}" class="slide-item">User List</a></li>
               </ul>
             </li>
+            @endif
+
+            @if(in_array("appointment",$permissions))
             <li class="slide">
               <a class="side-menu__item" href="{{ url('/admin/appointments') }}">
               <i class="fa fa-calendar side-menu__icon"></i>
@@ -44,6 +51,9 @@
               <span class="side-menu__label">Appointments</span></a>
               
             </li>
+            @endif
+
+           @if(in_array("accounts",$permissions))
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="Vertical-IconSidedar-Light/#">
               <i class="fa fa-bar-chart side-menu__icon"></i>
@@ -54,13 +64,20 @@
                 <li><a href="{{ url('/admin/sales-purchases') }}" class="slide-item">Purchases</a></li>
               </ul>
             </li>
+            @endif
+
+            @if(in_array("users/customer",$permissions))
             <li class="slide">
               <a class="side-menu__item" href="{{ url('/admin/users') }}">
               <i class="fa fa-users side-menu__icon"></i>
               
               <span class="side-menu__label">Users</span></a>
-              
+             
             </li>
+            @endif
+
+
+            @if(in_array("services",$permissions))  
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="Vertical-IconSidedar-Light/#">
               <i class="fa fa-gears side-menu__icon"></i>
@@ -73,6 +90,10 @@
                 <li><a href="{{ url('/admin/services-presubcategories') }}" class="slide-item">Post Sub Categories</a></li>
               </ul>
             </li>
+            @endif
+
+
+            
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="Vertical-IconSidedar-Light/#">
               <i class="fa fa-shopping-cart side-menu__icon"></i>
@@ -85,6 +106,10 @@
                 <li><a href="{{ url('/admin/products-brands') }}" class="slide-item">Brands</a></li>
               </ul>
             </li>
+
+
+
+            @if(in_array("inventory",$permissions))
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="#">
               <i class="fa fa-edit side-menu__icon"></i>
@@ -95,6 +120,10 @@
                 
               </ul>
             </li>
+            @endif
+
+
+            @if(in_array("staff-management",$permissions))
             <li class="slide">
               <a class="side-menu__item" data-toggle="slide" href="Vertical-IconSidedar-Light/#">
               <i class="fa fa-user side-menu__icon"></i>
@@ -107,6 +136,7 @@
                 
               </ul>
             </li>
+            @endif
             <li class="slide">
               <a class="side-menu__item" href="{{ url('/admin/offers') }}">
               <i class="fa fa-gift side-menu__icon"></i>

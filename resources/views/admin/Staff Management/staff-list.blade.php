@@ -43,7 +43,7 @@
                                 <th>Contact Number</th>
                                 <th>Email Id</th>
                                 <th>Joining Date</th>
-                                <th>Skills</th>
+                                <th>Services</th>
                                 <th>Designation</th>
                                 <th>Employee Id</th>
                                 <th>Options</th>
@@ -64,7 +64,7 @@
                               <td class="text-nowrap align-middle">
                                 @foreach($s->skills as $skill)
                                     <span class="btn btn-primary">
-                                        {{$skill->name}}
+                                        {{$skill->service_description}}
                                     </span>
                                 @endforeach
                               </td>

@@ -123,6 +123,7 @@ class ProductsBrandsController extends Controller
     public function destroyBrand(Request $request , $id){
         try{
             ProductsBrands::where('id', $id)->delete();
+            DB::table('products')->where('brand_id',$id)->delete();
             return Redirect::back()->with('success','Brand Deleted Successfully!');
     
         }catch(\Exception $e){

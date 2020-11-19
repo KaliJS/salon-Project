@@ -25,4 +25,8 @@ class Appointments extends Model
     public function services(){
         return $this->belongsToMany('App\Models\Services','appointments_services','appointment_id','service_id');
     }
+
+    public function appointments_details(){
+        return $this->hasMany('App\Models\AppointmentService','appointment_id','id');
+    }
 }

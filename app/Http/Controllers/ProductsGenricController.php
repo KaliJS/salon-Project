@@ -123,6 +123,7 @@ class ProductsGenricController extends Controller
     public function destroyGenric(Request $request , $id){
         try{
             ProductsGenric::where('id', $id)->delete();
+            DB::table('products')->where('genric_name_id',$id)->delete();
             return Redirect::back()->with('success','Genric Deleted Successfully!');
     
         }catch(\Exception $e){

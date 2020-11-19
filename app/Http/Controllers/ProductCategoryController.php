@@ -123,6 +123,7 @@ class ProductCategoryController extends Controller
     public function destroyCategory(Request $request , $id){
         try{
             ProductCategory::where('id', $id)->delete();
+            DB::table('products')->where('category_id',$id)->delete();
             return Redirect::back()->with('success','Category Deleted Successfully!');
     
         }catch(\Exception $e){

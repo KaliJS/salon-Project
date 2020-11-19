@@ -38,35 +38,58 @@
 
                           <th>Name</th>
                           <th>Mobile Number</th>
-                          <th>Service Type</th>
-                          <th>Time and Date</th>
-                          <th>Stylist Name</th>
-                          <th>Service Time</th>
+
+                          <th>Service Date</th>
+      
                           <th>Gender</th>
                           <th>Note</th>
+                          <th>Services Selected</th>
                           <th>Status</th>
+
                           <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($appointments as $appointment)
                         <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
+                          <td>{{$appointment->customer->name}}</td>
+                          <td>{{$appointment->customer->phone}}</td>
+
+                          
+
+                          <td>{{$appointment->date}}</td>
+
+                          <td>{{$appointment->customer->gender}}</td>
+                          <td>{{$appointment->customer->note}}</td>
+
+                          <td> 
+                            @foreach($appointment->appointments_details as $detail)
+                            <ul>
+                              <li>Service Type: {{$detail->service->service_description}}</li>
+                              <li>Service Time: {{$detail->time}}</li>
+                              <li>Stylist Name: {{$detail->staff->name}}</li>
+                              
+                            </ul>
+                             
+                            @endforeach
+                          </td>
+                          
+                          
+                          <td id="updateMessage{{$appointment->id}}">
+                            {{$appointment->status_name}}
+                         
+                          </td>
                           <td>
                             <div class="btn-group">
                               <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                               <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('appointments.edit',$appointment) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                <form action="{{ route('appointments.destroy'.$appointment) }}" method="POST">
-                                    @method('DELET')
+                                <button class="dropdown-item completeAppointment" type="button" id="{{$appointment->id}}" href=""><i class="fa fa-check-circle mr-2"></i> Completed</button>
+
+                                <button class="dropdown-item cancelAppointment" type="button" id="{{$appointment->id}}" href=""><i class="fa fa-close mr-2"></i> Cancel</button>
+
+                                <a class="dropdown-item" href="{{ route('appointments.edit',$appointment) }}"><i class="fa fa-edit mr-2"></i> Re-Schedule</a>
+                                <form action="{{ route('appointments.destroy',$appointment) }}" method="POST">
+                                    @method('DELETE') 
                                     @csrf
                                     <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
                                 </form>
@@ -90,5 +113,50 @@
 
           </div>
         </div>
+
+@stop
+
+
+@section('js')
+
+        <script type="text/javascript">
+            
+
+            $(document).on("click",".cancelAppointment",function(){
+                const id=this.id;
+                
+                $.ajax({
+                    method:'POST',
+                    url:`/admin/appointments/cancelAppointment`,
+                    data:{id,"_token":"{{csrf_token()}}"}
+                }).then(response=>{
+                  if(response == 'success'){
+                    $('#updateMessage'+id).text('Cancelled');
+                    alert('Update Successfully');
+                  }
+                }).fail(error=>{
+                    console.log('error',error);
+                });
+            });
+
+            $(document).on("click",".completeAppointment",function(){
+                const id=this.id;
+                
+                $.ajax({
+                    method:'POST',
+                    url:`/admin/appointments/completeAppointment`,
+                    data:{id,"_token":"{{csrf_token()}}"}
+                }).then(response=>{
+                  if(response == 'success'){
+                    $('#updateMessage'+id).text('Completed');
+                    alert('Update Successfully');
+                  }
+                }).fail(error=>{
+                    console.log('error',error);
+                });
+            });
+
+
+        </script>
 
 @stop

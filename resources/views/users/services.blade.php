@@ -237,11 +237,11 @@
                               <div class="pricing-list-block bg-white p-a20">
                                   <div class="pricing-list-img p-b10"><img src="{{asset('users/images/sep-leaf-left.png')}}" alt=""></div>
                                   <ul>
-                                      <li>
-                                            <div class="price-list-info">
-                                                <h3>Women Starts From </h3>
-                                                
-                                            </div>
+                                      <li class="row price-list-info">
+                                            
+                                                <h3 class="col-md-6">Women</h3>
+                                                <h3 class="col-md-6 f-right">Starts From</h3>
+                                           
                                             
                                         </li>
                                       <li>

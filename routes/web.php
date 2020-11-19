@@ -74,12 +74,20 @@ Route::resource('/dashboard', DashboardController::class);
 Route::resource('/customers', CustomersController::class);
 Route::resource('/todays-appointment', TodaysAppointmentController::class);
 
+/************************dashboard start*********************/
+Route::post('/dashboard-user/getStaffData', [DashboardUserController::class, 'getStaffData']);
 Route::resource('/dashboard-user', DashboardUserController::class);
 
-Route::resource('/appointments', AppointmentsController::class);
+/******************dashboard end*******************/
+/******************Start Invoice*******************/
 
+//Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
+//Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
+Route::get('/sales-invoices/getCustomerData',[SalesInvoicesController::class,'getCustomerData']);
+Route::post('/sales-invoices/getAmountData',[SalesInvoicesController::class,'getAmountData']);
 Route::resource('/sales-invoices', SalesInvoicesController::class);
 
+/******************End Invoice*******************/
 /******************Start Purchases*******************/
 
 Route::resource('/sales-purchases', SalesPurchasesController::class);
@@ -94,8 +102,13 @@ Route::get('/editCustomer/{id}', [CustomersController::class, 'editCustomer']);
 Route::post('/updateCustomer/{id}', [CustomersController::class, 'updateCustomer']);
 Route::post('/destroyCustomer/{id}', [CustomersController::class, 'destroyCustomer']);
 
-//services
-Route::get('/services', [ServicesController::class, 'index']);
+/********************Start Services********************/
+Route::post('/services/getCategoryData', [ServicesController::class,'getCategoryData']);
+Route::post('/services/getSubCategoryData', [ServicesController::class,'getSubCategoryData']);
+Route::post('/services/getDeleteSelectedImages', [ServicesController::class,'getDeleteSelectedImages']);
+Route::resource('/services', ServicesController::class);
+
+/********************End Services********************/
 
 //services-categories
 Route::resource('/services-categories', ServicesCategoriesController::class);
@@ -158,7 +171,6 @@ Route::post('/retail-products/destroyRetailProduct/{id}', [InventoryRetailProduc
 /*********************End Retail-Products********************/
 
 
-/********************* Staff Start *******************/
 
 Route::resource('/staff', StaffController::class);
 
@@ -168,6 +180,8 @@ Route::resource('/staff', StaffController::class);
 /********************* Appointments Start ***************/
 
 Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
+Route::post('/appointments/cancelAppointment',[AppointmentsController::class,'cancelAppointment']);
+Route::post('/appointments/completeAppointment',[AppointmentsController::class,'completeAppointment']);
 Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
 Route::post('/appointments/getServiceData',[AppointmentsController::class,'getServiceData']);
 Route::resource('/appointments', AppointmentsController::class);

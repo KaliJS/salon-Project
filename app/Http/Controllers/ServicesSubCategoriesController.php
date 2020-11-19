@@ -147,6 +147,7 @@ class ServicesSubCategoriesController extends Controller
     public function destroySubCategory(Request $request , $id){
         try{
             ServicesSubCategories::where('id', $id)->delete();
+            DB::table('service_pre_sub_categories')->where('subcategory_id',$id)->delete();
             return Redirect::back()->with('success','Sub Category Deleted Successfully!');
     
         }catch(\Exception $e){

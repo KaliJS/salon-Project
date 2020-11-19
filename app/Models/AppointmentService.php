@@ -20,4 +20,8 @@ class AppointmentService extends Model
         return $this->hasOne('App\Models\Appointments','id','appointment_id');
     }
 
+    public function staff(){
+        return $this->hasOne('App\Models\Staff','id','staff_id');
+    }
+
 }

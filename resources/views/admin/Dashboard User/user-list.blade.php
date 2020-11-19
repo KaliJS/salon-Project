@@ -27,7 +27,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ url('dashboard-user/user-list-create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New User</a>
+                        <a href="{{ route('dashboard-user.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New User</a>
                       </div>
                       
                     </div>
@@ -46,91 +46,44 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              
-                              
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('dashboard-user/user-list-edit') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              
-                              
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('dashboard-user/user-list-edit') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash mr-2"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              
-                              
-                              <td class="text-nowrap align-middle"><span class="font-weight-bold">$230</span></td>
-                              <td class="text-nowrap align-middle"><span>10 July 2020</span></td>
-                              
-                              <td class="text-nowrap align-middle">
-                                25 July 2021
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td class="text-nowrap align-middle">
-                                Daneil Robert
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('dashboard-user/user-list-edit') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash mr-2"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
                             
+                            
+                            @foreach($users as $user)
+                            <tr>
+                              
+                              
+                            <td class="text-nowrap align-middle"><span class="font-weight-bold">{{$user->staff->name}}</span></td>
+                              <td class="text-nowrap align-middle"><span>{{$user->staff->phone}}</span></td>
+                              
+                              <td class="text-nowrap align-middle">
+                                {{$user->staff->email}}
+                              </td>
+                              <td class="text-nowrap align-middle">
+                              {{$user->staff->designation->name}}
+                              </td>
+                              <td class="text-nowrap align-middle">
+                                {{$user->staff->employee_id}}
+                              </td>
+                              <td class="text-nowrap align-middle">
+                                @foreach($user->permissions as $permission)
+                                <button class="btn btn-primary">{{$permission->permission}}</button>
+                                @endforeach
+                              </td>
+                              <td>
+                                <div class="btn-group">
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="{{ route('dashboard-user.edit',$user) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ route('dashboard-user.destroy',$user) }}" method="POST">
+                                      @method('DELETE')
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            @endforeach
                           </tbody>
                         </table>
                       </div>

@@ -16,131 +16,7 @@
               </div>
             </div>
             <!--End Page header-->
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Add Services</h3>
-                  </div>
-                  <div class="card-body p-6">
-
-
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li role="presentation" class="active mr-2"><a href="#home" class="btn btn-primary text-white" aria-controls="home" role="tab" data-toggle="tab"><span>Add Services</span></a></li>
-                      <li role="presentation" class="mr-2"><a href="#profile" class="btn btn-primary text-white" aria-controls="profile" role="tab" data-toggle="tab"><span>Add Categories</span></a></li>
-                      <li role="presentation" class=" mr-2"><a href="#messages" class="btn btn-primary text-white"aria-controls="messages" role="tab" data-toggle="tab"><span>Add Subcategory</span></a></li>
-                      <li role="presentation"><a href="#settings" class="btn btn-primary text-white" aria-controls="settings" role="tab" data-toggle="tab"><span>Add Pre Subcategory</span></a></li>
-                      
-                    </ul>
-        
-        
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane mt-3 active" id="home">
-                          <div class="card-body">
-                          <form class="form-horizontal">
-                            <div class="form-group row ">
-                              <label class="col-md-3 form-label">Gender</label>
-                              <div class="col-md-9">
-                                <select class="form-control " tabindex="-1" aria-hidden="true">
-                                  <option>Male</option>
-                                  <option>Female</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row ">
-                              <label class="col-md-3 form-label">Select Pre Subcategory</label>
-                              <div class="col-md-9">
-                                <select class="form-control " tabindex="-1" aria-hidden="true">
-                                  <option>presub1</option>
-                                  <option>presub2</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row ">
-                              <label class="col-md-3 form-label">Select Subcategory</label>
-                              <div class="col-md-9">
-                                <select class="form-control " tabindex="-1" aria-hidden="true">
-                                  <option>subcat1</option>
-                                  <option>subcat2</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="inputName" class="col-md-3 form-label">Add price with CGST and SGST 18%</label>
-                              <div class="col-md-9">
-                                <input type="number" class="form-control" id="inputName" placeholder="Add price with CGST and SGST 18%">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label class="col-md-3 form-label">Time</label>
-                              <div class="col-md-9">
-                                <input class="form-control" type="time" name="time">
-                              </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                              <label for="inputName" class="col-md-3 form-label">Description</label>
-                              <div class="col-md-9">
-                                <input type="text" class="form-control" id="inputDesignation" placeholder="Description">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                            <div class="form-label col-md-3">Images</div>
-                            <div class="custom-file col-md-9">
-                              <input type="file" class="custom-file-input" name="example-file-input-custom">
-                              <label class="custom-file-label">Choose file</label>
-                            </div>
-                          </div>
-                            
-                            <div class="form-group mb-0 mt-4 row justify-content-end">
-                              <div class="col-md-9">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                                
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                        <div role="tabpanel" class="tab-pane mt-3" id="profile">
-                          <div class="form-group">
-                            <label class="col-md-3 form-label">Category</label>
-                            <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Category">
-                              <span class="input-group-append">
-                                <button class="btn btn-primary" type="button">Add</button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane mt-3" id="messages">
-                          <div class="form-group">
-                            <label class="col-md-3 form-label">Subcategory</label>
-                            <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Subcategory">
-                              <span class="input-group-append">
-                                <button class="btn btn-primary" type="button">Add</button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane mt-3" id="settings">
-                          <div class="form-group">
-                            <label class="col-md-3 form-label">Pre Subcategory</label>
-                            <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Pre Subcategory">
-                              <span class="input-group-append">
-                                <button class="btn btn-primary" type="button">Add</button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+          
            
          
             <div class="row">
@@ -149,86 +25,66 @@
                   <div class="card-header">
                     <h3 class="card-title">Services List</h3>
                   </div>
+                  <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <a href="{{ route('services.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Service</a>
+                      </div>
+
+                    </div>
                   <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap">
                       <thead>
                         <tr>
                           
                           <th>Gender</th>
-                          <th>Image</th>
-                          <th>Select Pre Sub</th>
-                          <th>Select Sub Category</th>
+                          <!-- <th>Image</th> -->
+                          <th>Category</th>
+                          <th>Sub Category</th>
+                          <th>Post Category</th>
                           <th>Add Price With CGST and SGST !8%</th>
-                          <th>Time</th>
+                          <th>Time (In Minutes)</th>
                           <th>Discription</th>
                           <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($services as $service)
                         <tr>
-                          <td>Joan Powell</td>
-                          <td>
-                            <img src="{{ asset('login/images/login.png') }}" class="img-fluid" width="60px">
-                          </td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
+                          <td>{{$service->for_which_gender}}</td>
+                          <!-- <td>
+                            @foreach($service->images as $image)
+                            <img src="{{ asset('uploads/service/'.$image->image_url) }}" class="img-fluid" width="60px">
+                            @endforeach
+                          </td> -->
+                          <td>{{$service->category->name}}</td>
+                          <td>{{$service->subcategory->name}}</td>
+                          <td>{{$service->presubcategory->name}}</td>
+                          <td>{{$service->price}}</td>
+                          <td>{{$service->service_time}}</td>
+                          <td>{{$service->description}}</td>
                           <td>
                                 <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('services/edit-service') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
+                                    <a class="dropdown-item" href="{{ route('services.edit',$service) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ route('services.destroy',$service) }}" method="POST">
+                                      @method('DELETE')
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
                                   </div>
                                 </div>
                               </td>
                         </tr>
+
+                        @endforeach
                         
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>
-                            <img src="{{ asset('login/images/login.png') }}" class="img-fluid" width="60px">
-                          </td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('services/edit-service') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>
-                            <img src="{{ asset('login/images/login.png') }}" class="img-fluid" width="60px">
-                          </td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>
-                                <div class="btn-group">
-                                  <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
-                                  <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item" href="{{ url('services/edit-service') }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</a>
-                                  </div>
-                                </div>
-                              </td>
-                        </tr>
+                        
                       </tbody>
                     </table>
                   </div>
+                </div>
                   <!-- table-responsive -->
                 </div>
                 </div>

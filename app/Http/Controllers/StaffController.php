@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\Services;
 use App\Models\Branch;
 use App\Models\StaffDesignation;
 use App\Models\StaffSkills;
@@ -22,7 +23,7 @@ class StaffController extends Controller
     {
         try{
             $staff = Staff::where('branch_id',Auth::user()->branch_id)->with('skills',function($q){
-                $q->select('name');
+                $q->select('service_description');
             })->orderBy('id')->get();
             return view('admin.Staff Management.staff-list',compact('staff'));
 
@@ -73,7 +74,7 @@ class StaffController extends Controller
             $skills=$request->skills;
             $input=$request->all();
             unset($input['skills']);
-            $input['branch_id']=Auth::user()->id;
+            $input['branch_id']=Auth::user()->branch_id;
             $inserted_staff=Staff::create($input);
             $data=[];
             foreach($skills as $skill){
@@ -111,9 +112,10 @@ class StaffController extends Controller
      */
     public function edit(Staff $staff)
     {
+        
         try{
 
-            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('id')->get(['id','service_description']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $selected_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->pluck('skill_id')->toArray();
             return view('admin.Staff Management.edit-staff',compact('staff','skills','designations','selected_skills'));
@@ -132,6 +134,7 @@ class StaffController extends Controller
      */
     public function update(Request $request, Staff $staff)
     {
+        //return $staff;
         $request->validate([
             'email' => 'required',
             'name' => 'required',

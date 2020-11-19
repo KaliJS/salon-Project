@@ -27,7 +27,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ url('sales/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Invoice</a>
+                        <a href="{{ route('sales-invoices.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Invoice</a>
                       </div>
                       
                     </div>
@@ -42,61 +42,59 @@
                           <th>Contact Number</th>
                           <th>Gender</th>
                           <th>GST Number</th>
-                          <th>Services/Products</th>
+                          <th>Services</th>
+                          <th>Products</th>
                           <th>Amount</th>
                           <th>Offers</th>
                           <th>Payment Type</th>
+                          <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                        @foreach($invoices as $invoice)
                         <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
-                        <tr>
-                          <td>Joan Powell</td>
-                          <td>42342342</td>
-                          <td>joan@powell.com</td>
-                          <td>designation</td>
-                          <td>77834</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                          <td>permission</td>
-                        </tr>
+
+                              <td class="text-nowrap align-middle">{{$invoice->id}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->customer->name}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->customer->address}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->customer->phone}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->customer->gender == 'F'?"Female":"Male"}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->customer->gst_no}}</td>
+                              <td class="text-nowrap align-middle">
+                                @foreach($invoice->services as $service)
+                                    <span class="btn btn-primary">
+                                        {{$service->service_description}}
+                                    </span>
+                                @endforeach
+                              </td>
+                              <td class="text-nowrap align-middle">
+                                @foreach($invoice->products as $product)
+                                    <span class="btn btn-primary">
+                                        {{$product->description}}
+                                    </span>
+                                @endforeach
+                              </td>
+                              <td class="text-nowrap align-middle">{{$invoice->final_amount}}</td>
+                              <td class="text-nowrap align-middle">{{$invoice->offers[0]->name}}</td>
+                              
+                              <td class="text-nowrap align-middle">{{$invoice->payment_type}}</td>
+
+                              <td>
+                                <div class="btn-group">
+                                  <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                  <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="{{ route('sales-invoices.edit',$invoice) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+                                    <form action="{{ route('sales-invoices.destroy',$invoice) }}" method="POST">
+                                      @method('DELETE')
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                        @endforeach
                         
                          
                       </tbody>

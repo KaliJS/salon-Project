@@ -27,7 +27,7 @@
                 <h4 class="page-title mb-0">Hi! Welcome Back</h4>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#"><i class="angle fa fa-angle-right mr-2"></i>Appointments</a></li>
-                  <li class="breadcrumb-item"><a href="#">Create Appointment</a></li>
+                  <li class="breadcrumb-item"><a href="#">Edit Appointment</a></li>
 
                 </ol>
               </div>
@@ -40,10 +40,11 @@
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">Create Appointment</h4>
+                    <h4 class="card-title">Update Appointment</h4>
                   </div>
                   <div class="card-body">
-                  <form class="form-horizontal" action="{{route('appointments.store')}}" method="POST">
+                  <form class="form-horizontal" action="{{route('appointments.update',$appointment)}}" method="POST">
+                    @method('PUT')
                       @csrf
                       <div class="form-group row">
                         <label for="inputName" class="col-md-3 form-label">Select Customer</label>
@@ -51,35 +52,35 @@
                           <select name="customer_id" id="customer_id" class="form-control" required>
                             <option value="" selected disabled>Select</option>
                             @foreach($customers as $customer)
-                            <option value="{{$customer->id}}">{{$customer->name}}</option>
+                            <option value="{{$customer->id}}" {{$appointment->customer_id==$customer->id?'selected':''}}>{{$customer->name}}</option>
                             @endforeach
                           </select>
                         </div>
                       </div>
-                      <div class="form-group row hidden customerDetails">
+                      <div class="form-group row customerDetails">
                         <label class="col-md-3 form-label">Gender</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="gender" disabled>
+                            <input type="text" value="{{$appointment->customer->gender=='M'?'Male':'Female'}}" class="form-control" id="gender" disabled>
                         </div>
                       </div>
-                      <div class="form-group row hidden customerDetails">
+                      <div class="form-group row customerDetails">
                         <label for="inputName" class="col-md-3 form-label">Contact Number</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="phone" disabled>
+                          <input type="text" value="{{$appointment->customer->phone}}" class="form-control" id="phone" disabled>
                         </div>
                       </div>
 
-                      <div class="form-group row hidden customerDetails">
+                      <div class="form-group row customerDetails">
                         <label for="inputName" class="col-md-3 form-label">Note</label>
                         <div class="col-md-9">
-                          <input type="text" class="form-control" id="note" disabled>
+                          <input type="text" value="{{$appointment->customer->note}}" class="form-control" id="note" disabled>
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label class="col-md-3 form-label">Date</label>
                         <div class="col-md-9">
-                          <input class="form-control" type="date" name="date" required>
+                          <input class="form-control" value="{{$appointment->date}}" type="date" name="date" required>
                         </div>
                       </div>
 
@@ -88,7 +89,7 @@
                         <div class="col-md-9">
                             <select name="services[]" id="services" class="form-control" multiple required>
                                 @foreach($services as $service)
-                                <option value="{{$service->id}}">{{$service->service_description}}</option>
+                                <option value="{{$service->id}}" {{in_array($service->id,$selected_services)?"selected":""}}>{{$service->service_description}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -96,11 +97,14 @@
 
                       <div class="service_details">
 
+
+
+
                       </div>
 
                       <div class="form-group mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
-                          <button type="submit" class="btn btn-primary">Create</button>
+                          <button type="submit" class="btn btn-primary">Update</button>
 
                         </div>
                       </div>
@@ -123,7 +127,7 @@
             $(document).on("change","#customer_id",function(){
                 const customer_id=$(this).val();
                 $.ajax({
-                    url:`getCustomerData?customer_id=${customer_id}`
+                    url:`/admin/appointments/getCustomerData?customer_id=${customer_id}`
                 }).then(response=>{
                     if(response){
                         $(".customerDetails").removeClass("hidden");
@@ -145,7 +149,7 @@
                 console.log(service_ids);
                 $.ajax({
                     method:'POST',
-                    url:`getServiceData`,
+                    url:`/admin/appointments/getServiceData`,
                     data:{service_ids,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
                     $(".service_details").html(response);
@@ -166,11 +170,28 @@
                 }
                 $.ajax({
                     method:'POST',
-                    url:`getStylistData`,
+                    url:`/admin/appointments/getStylistData`,
                     data:{stylist_id,date,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
                     console.log('id',id);
                     $(`#${id} .bookedButtons`).html(response);
+                }).fail(error=>{
+                    console.log('error',error);
+                });
+            });
+
+
+            $(window).on("load",function(){
+                
+                const service_ids=$("#services").val();
+                
+                $.ajax({
+                    method:'POST',
+                    url:`/admin/appointments/getServiceData`,
+                    data:{service_ids,"_token":"{{csrf_token()}}"}
+                }).then(response=>{
+                    $(".service_details").html(response);
+                    $("select").select2();
                 }).fail(error=>{
                     console.log('error',error);
                 });
