@@ -181,9 +181,10 @@ Route::resource('/staff', StaffController::class);
 
 Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
 Route::post('/appointments/cancelAppointment',[AppointmentsController::class,'cancelAppointment']);
-Route::post('/appointments/completeAppointment',[AppointmentsController::class,'completeAppointment']);
+Route::get('/appointments/completeAppointment/{id}',[AppointmentsController::class,'completeAppointment']);
 Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
 Route::post('/appointments/getServiceData',[AppointmentsController::class,'getServiceData']);
+Route::post('/appointments/checkAppointmentBooked',[AppointmentsController::class,'checkAppointmentBooked']);
 Route::resource('/appointments', AppointmentsController::class);
 
 /********************* Appointments End ***************/

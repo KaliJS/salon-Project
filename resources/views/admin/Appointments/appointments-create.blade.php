@@ -175,6 +175,33 @@
                     console.log('error',error);
                 });
             });
+
+
+
+
+            $(document).on("change",".time",function(){
+                const time=$(this).val();
+                const date=$("input[name=date]").val(); 
+                const staff=$(this).parent().parent().parent().find(".stylist_name").val();
+                if(!staff)
+                {
+                  alert('please select stylist');
+                  return;
+                }
+                $.ajax({
+                    method:'POST',
+                    url:`checkAppointmentBooked`,
+                    data:{staff,date,time,"_token":"{{csrf_token()}}"}
+                }).then(response=>{
+                    if(response =='error')
+                    {
+                      alert('Time slot is already booked');
+                      $(this).val("");
+                    }
+                }).fail(error=>{
+                    console.log('error',error);
+                });
+            });
         </script>
 
 @stop

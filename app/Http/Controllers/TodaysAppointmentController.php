@@ -14,8 +14,9 @@ class TodaysAppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.Dashboard.todays-appointment');
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -6,9 +6,11 @@ use App\Models\Appointments;
 use Illuminate\Http\Request;
 use App\Models\Customers;
 use App\Models\Services;
+use App\Models\Products;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Staff;
+use App\Models\Offers;
 use Carbon\Carbon;
 use DB;
 use App\Models\AppointmentService;
@@ -69,15 +71,17 @@ class AppointmentsController extends Controller
                 $service_time_booked=Carbon::parse($request->date.$request['time'.$service]);
                 $service_time_end=$service_time_booked->copy()->addMinutes($service_data->service_time);
                 $staff_id=$request['stylist_name'.$service];
-                $appointments=\DB::table('appointments_services')->where('staff_id',$staff_id)->whereBetween('service_time_booked',[$service_time_booked,$service_time_end])->count();
-                
-                if($appointments>0){
-                    return Redirect::back()->with('error',"Slot already booked for the selected stylist");
-                }
+                // $appointments=\DB::table('appointments_services')->where('staff_id',$staff_id)->whereBetween('service_time_booked',[$service_time_booked,$service_time_end])->count();
+
+                // if($appointments>0){
+                //     return Redirect::back()->with('error',"Slot already booked for the selected stylist");
+                // }
                 $data[]=array('branch_id'=>$input['branch_id']
                         ,'appointment_id'=>$appointment->id,'service_id'=>$service
                         ,'time'=>$request['time'.$service],'staff_id'=>$staff_id
-                        ,'service_time_booked'=>$service_time_booked->format("Y-m-d H:i:s"));
+                        ,'service_start_time'=>$service_time_booked->format("Y-m-d H:i:s"),
+                        'service_end_time'=>$service_time_end->format("Y-m-d H:i:s")
+                    );
             }
 
             $insert_services=DB::table('appointments_services')->insert($data);
@@ -159,7 +163,9 @@ class AppointmentsController extends Controller
                 $data[]=array('branch_id'=>$input['branch_id']
                         ,'appointment_id'=>$appointment->id,'service_id'=>$service
                         ,'time'=>$request['time'.$service],'staff_id'=>$staff_id
-                        ,'service_time_booked'=>$service_time_booked->format("Y-m-d H:i:s"));
+                        ,'service_start_time'=>$service_time_booked->format("Y-m-d H:i:s"),
+                        'service_end_time'=>$service_time_end->format("Y-m-d H:i:s")
+                    );
             }
             $deleted_services=DB::table('appointments_services')->where('appointment_id',$appointment->id)->delete();
             $insert_services=DB::table('appointments_services')->insert($data);
@@ -208,9 +214,29 @@ class AppointmentsController extends Controller
     public function completeAppointment(Request $request){
         $cancel_id=$request->id;
 
-        Appointments::where('id', $cancel_id)->update(array('status' => '1'));
+
+
+        $services=Services::where('branch_id',Auth::user()->branch_id)->get(['id','service_description']);
         
-        return 'success';
+        $customer_id =DB::table('appointments')->where('id',$cancel_id)->pluck('customer_id')->toArray();
+        $customers=Customers::where('id',$customer_id)->first();
+
+        $appointment=Appointments::where('id',$cancel_id)->first();
+
+        $offers=Offers::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
+        $products=Products::where('branch_id',Auth::user()->branch_id)->get(['id','description']);
+        //$selected_products=DB::table('invoices_products')->where('invoice_id',$sales_invoice->id)->pluck('product_id')->toArray();
+        $selected_services=DB::table('appointments_services')->where('appointment_id',$cancel_id)->pluck('service_id')->toArray();
+        return view('admin.Appointments.appointments-complete',compact('selected_services','appointment','services','customers','offers', 'products'));
+
+
+
+
+
+
+        // Appointments::where('id', $cancel_id)->update(array('status' => '1'));
+        
+        // return 'success';
     }
 
     public function getCustomerData(Request $request){
@@ -235,7 +261,7 @@ class AppointmentsController extends Controller
     public function getStylistData(Request $request){
         $result="";
         $timeArray=array();
-        AppointmentService::with('service:id,service_time')->whereDate('service_time_booked',$request->date)->get()->map(function($appointment) use(&$timeArray){
+        AppointmentService::with('service:id,service_time')->whereDate('service_start_time',$request->date)->get()->map(function($appointment) use(&$timeArray){
             $start_time=Carbon::parse($appointment->time)->format("g:i A");
             $end_time=Carbon::parse($appointment->time)->addMinutes($appointment->service->service_time)->format("g:i A");
             $timeArray[]="$start_time - $end_time";
@@ -251,5 +277,19 @@ DELIMETER;
         $final_result="<span style='font-weight:bold'>Booked time slots :</span>".$result;
         return $final_result;
     }
+
+    public function checkAppointmentBooked(Request $request){
+        
+        $date_time=Carbon::parse($request->date.' '.$request->time)->format("Y-m-d H:i:s");
+        $check_appointments=AppointmentService::where('staff_id',$request->staff)->where('service_start_time','<=',$date_time)->where('service_end_time','>=',$date_time)->first();
+        if($check_appointments){
+            return 'error';
+        }
+
+    }
+
+
+
+
 
 }

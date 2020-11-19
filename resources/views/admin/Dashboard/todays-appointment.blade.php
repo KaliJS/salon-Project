@@ -35,248 +35,249 @@
             <!--End Page header-->
             
             <div class="card">
-                  <div class="card-header">
-                    <div class="card-title">Today's Appointments</div>
-                  </div>
-                  <div class="card-body">
-                    <div class="">
-                      <div class="table-responsive">
-                        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row">
-                          <div class="col-sm-12 col-md-6">
-                            <div class="dt-buttons btn-group">
-                                 
-                            </div>
+              <div class="card-header">
+                <div class="card-title">Today's Appointments</div>
+              </div>
+              <div class="card-body">
+                <div class="">
+                  <div class="table-responsive">
+                    <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                          <div class="dt-buttons btn-group">
+                               
                           </div>
-
                         </div>
-                        <div class="row">
-                          <div class="col-sm-12">
-                          <table id="example" class="table table-bordered text-nowrap key-buttons dataTable no-footer dtr-inline" role="grid" aria-describedby="example_info" style="width: 1152px;">
-                          <thead>
-                            <tr role="row">
-                              <th class="border-bottom-0 sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 172.889px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 258.889px;" aria-label="Position: activate to sort column ascending">Mobile Number</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 127.889px;" aria-label="Office: activate to sort column ascending">Service Taken</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 68.8889px;" aria-label="Age: activate to sort column ascending">Time and Date</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 154.889px;" aria-label="Start date: activate to sort column ascending">Stylist Name</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Service Time</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Gender</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Note</th>
-                              <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            
-                            
-                           <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                              <td tabindex="0" class="sorting_1">Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                              <td>$162,700</td>
-                            </tr>
-                            
 
-                          </tbody>
-                        </table>
                       </div>
-                    </div>
-                  </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table id="example" class="table table-bordered text-nowrap key-buttons dataTable no-footer dtr-inline" role="grid" aria-describedby="example_info" style="width: 1152px;">
+                            <thead>
+                              <tr role="row">
+                                <th class="border-bottom-0 sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 172.889px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 258.889px;" aria-label="Position: activate to sort column ascending">Mobile Number</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 127.889px;" aria-label="Office: activate to sort column ascending">Service Taken</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 68.8889px;" aria-label="Age: activate to sort column ascending">Time and Date</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 154.889px;" aria-label="Start date: activate to sort column ascending">Stylist Name</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Service Time</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Gender</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Note</th>
+                                <th class="border-bottom-0 sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 111px;" aria-label="Salary: activate to sort column ascending">Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              
+                              
+                             <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              <tr role="row" class="odd">
+                                <td tabindex="0" class="sorting_1">Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                                <td>$162,700</td>
+                              </tr>
+                              
+
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
                 
 
 

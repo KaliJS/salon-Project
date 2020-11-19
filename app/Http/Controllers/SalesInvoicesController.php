@@ -51,6 +51,7 @@ class SalesInvoicesController extends Controller
     public function store(Request $request)
     {
         
+        
         $request->validate([
             'quantity' => 'required',
             'customer_id' => 'required',

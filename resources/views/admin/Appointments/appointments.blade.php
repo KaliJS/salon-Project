@@ -83,7 +83,11 @@
                             <div class="btn-group">
                               <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                               <div class="dropdown-menu" style="">
-                                <button class="dropdown-item completeAppointment" type="button" id="{{$appointment->id}}" href=""><i class="fa fa-check-circle mr-2"></i> Completed</button>
+                                <form action="{{ url('/admin/appointments/completeAppointment/'.$appointment->id) }}">
+                                  
+                                      @csrf
+                                <button type="submit" class="dropdown-item" href=""><i class="fa fa-check-circle mr-2"></i> Completed</button>
+                                </form>
 
                                 <button class="dropdown-item cancelAppointment" type="button" id="{{$appointment->id}}" href=""><i class="fa fa-close mr-2"></i> Cancel</button>
 
@@ -106,10 +110,6 @@
                 </div>
                 </div>
               </div>
-
-
-
-
 
           </div>
         </div>
