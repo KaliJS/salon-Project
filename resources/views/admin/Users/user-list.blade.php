@@ -21,12 +21,12 @@
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Users List</h3>
+                    <h3 class="card-title">Clients List</h3>
                   </div>
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New User</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Client</a>
                       </div>
                       
                     </div>
@@ -69,7 +69,7 @@
                                     <div class="dropdown-menu" style="">
 
                                       <a class="dropdown-item" href="{{ url('/admin/editCustomer/'.$user->id) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                      <form action="{{ url('/admin/destroyCustomer/'.$user->id) }}" method="POST">
+                                      <form action="{{ url('/admin/destroyCustomer/'.$user->id) }}" method="POST" onsubmit="return confirm('Are you sure , you want to delete this?')">
                                   
                                       @csrf
                                       

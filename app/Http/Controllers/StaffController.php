@@ -40,7 +40,7 @@ class StaffController extends Controller
     public function create()
     {
         try{
-            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
+            $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('service_description')->get(['id','service_description']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
 
             return view('admin.Staff Management.create-staff',compact('skills','designations'));
@@ -58,6 +58,7 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'email' => 'required',
             'name' => 'required|unique:staff_users',
@@ -75,6 +76,8 @@ class StaffController extends Controller
             $input=$request->all();
             unset($input['skills']);
             $input['branch_id']=Auth::user()->branch_id;
+            $input['days'] =implode(',',$request->days); 
+            
             $inserted_staff=Staff::create($input);
             $data=[];
             foreach($skills as $skill){
@@ -118,6 +121,7 @@ class StaffController extends Controller
             $skills = Services::where('branch_id',Auth::user()->branch_id)->orderBy('id')->get(['id','service_description']);
             $designations = StaffDesignation::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get(['id','name']);
             $selected_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->pluck('skill_id')->toArray();
+
             return view('admin.Staff Management.edit-staff',compact('staff','skills','designations','selected_skills'));
 
         }catch(Exception $e){
@@ -154,6 +158,7 @@ class StaffController extends Controller
             unset($input['_method']);
             unset($input['_token']);
             $branch_id=Auth::user()->branch_id;
+            $input['days'] =implode(',',$request->days);
             $updated_staff=Staff::where('id',$staff->id)->update($input);
             $deleted_skills=DB::table('staffs_skills')->where('staff_id',$staff->id)->delete();
             foreach($skills as $skill){
@@ -184,6 +189,7 @@ class StaffController extends Controller
         try{
             DB::table('staffs_skills')->where('staff_id',$staff->id)->delete();
             $staff->delete();
+            DB::table('appointments_services')->where('staff_id',$staff->id)->delete();
             DB::commit();
             return redirect()->back()
                 ->with('success', 'Staff deleted successfully.');

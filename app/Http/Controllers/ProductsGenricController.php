@@ -121,12 +121,15 @@ class ProductsGenricController extends Controller
     }
 
     public function destroyGenric(Request $request , $id){
+        \DB::beginTransaction();
         try{
             ProductsGenric::where('id', $id)->delete();
             DB::table('products')->where('genric_name_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Genric Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

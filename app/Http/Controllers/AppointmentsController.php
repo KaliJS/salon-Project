@@ -40,7 +40,7 @@ class AppointmentsController extends Controller
     {
         $services=Services::where('branch_id',Auth::user()->branch_id)->get(['id','service_description']);
         $customers=Customers::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        $staff=Staff::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
+        $staff=Staff::where('branch_id',Auth::user()->branch_id)->where('status','1')->get(['id','name']);
         return view('admin.Appointments.appointments-create',compact('services','customers','staff'));
     }
 
@@ -71,11 +71,6 @@ class AppointmentsController extends Controller
                 $service_time_booked=Carbon::parse($request->date.$request['time'.$service]);
                 $service_time_end=$service_time_booked->copy()->addMinutes($service_data->service_time);
                 $staff_id=$request['stylist_name'.$service];
-                // $appointments=\DB::table('appointments_services')->where('staff_id',$staff_id)->whereBetween('service_time_booked',[$service_time_booked,$service_time_end])->count();
-
-                // if($appointments>0){
-                //     return Redirect::back()->with('error',"Slot already booked for the selected stylist");
-                // }
                 $data[]=array('branch_id'=>$input['branch_id']
                         ,'appointment_id'=>$appointment->id,'service_id'=>$service
                         ,'time'=>$request['time'.$service],'staff_id'=>$staff_id
@@ -154,11 +149,11 @@ class AppointmentsController extends Controller
                 $service_time_booked=Carbon::parse($request->date.$request['time'.$service]);
                 $service_time_end=$service_time_booked->copy()->addMinutes($service_data->service_time);
                 $staff_id=$request['stylist_name'.$service];
-                $appointments=\DB::table('appointments_services')->where('staff_id',$staff_id)->whereBetween('service_time_booked',[$service_time_booked,$service_time_end])->count();
+                // $appointments=\DB::table('appointments_services')->where('staff_id',$staff_id)->whereBetween('service_time_booked',[$service_time_booked,$service_time_end])->count();
                 
-                if($appointments>0){
-                    return Redirect::back()->with('error',"Slot already booked for the selected stylist");
-                }
+                // if($appointments>0){
+                //     return Redirect::back()->with('error',"Slot already booked for the selected stylist");
+                // }
 
                 $data[]=array('branch_id'=>$input['branch_id']
                         ,'appointment_id'=>$appointment->id,'service_id'=>$service
@@ -251,8 +246,7 @@ class AppointmentsController extends Controller
         $service_ids=$request->service_ids;
         if(isset($service_ids)){
             $services=Services::whereIn('id',$service_ids)->select('id','service_description')->get();
-            $staff=Staff::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-            $view=view('admin.Appointments.get_service_data',compact('services','staff'));
+            $view=view('admin.Appointments.get_service_data',compact('services'));
             return $view->render();
         }
         return "";
@@ -280,12 +274,45 @@ DELIMETER;
 
     public function checkAppointmentBooked(Request $request){
         
-        $date_time=Carbon::parse($request->date.' '.$request->time)->format("Y-m-d H:i:s");
-        $check_appointments=AppointmentService::where('staff_id',$request->staff)->where('service_start_time','<=',$date_time)->where('service_end_time','>=',$date_time)->first();
-        if($check_appointments){
-            return 'error';
-        }
+        $day = Carbon::parse($request->date)->format('l'); 
+        $day=strtolower(substr($day, 0,3));
+        $time = $request->time;
+        $date_time = Carbon::parse($request->date." ".$time)->format("Y-m-d H:i:s");
+        $service = Services::find($request->service_id);
+        $service_time = $service->service_time;
 
+
+        $staff_ids=DB::table('staffs_skills')->join('staff_users','staff_users.id', '=', 'staffs_skills.staff_id')
+        ->where([
+            
+            ['skill_id',$request->service_id],
+            ['days','LIKE',"%$day%"],
+            ['shift_start_time','<=',$time],
+            ['shift_end_time','>=',$time]
+        ])
+        ->pluck('staffs_skills.staff_id')->unique();
+
+       $check_appointments=AppointmentService::whereIn('staff_id',$staff_ids)->where('service_start_time','<=',$date_time)->where('service_end_time','>=',$date_time)->pluck('staff_id');
+        
+        $final_staff = array_diff($staff_ids->toArray(),$check_appointments->toArray());
+        $staff_ids_final = DB::table('staffs_skills')->where('skill_id',$request->service_id)->pluck('staff_id');
+        $returning_staff=DB::table("staff_users")->whereIn('id',$staff_ids_final)->where('status','1')->get(['id','name']);
+        $result='<option selected disabled>Select</option>';
+
+        foreach($returning_staff as $s){
+
+            if(in_array($s->id,$final_staff)){
+                $result.=<<<DELIMETER
+            <option value="{$s->id}">{$s->name}</option>
+DELIMETER;
+            }else{
+                $result.=<<<DELIMETER
+            <option value="{$s->id}" disabled>{$s->name} (Booked for this date and time)</option>
+DELIMETER;
+            }
+        
+        }
+        return $result;
     }
 
 

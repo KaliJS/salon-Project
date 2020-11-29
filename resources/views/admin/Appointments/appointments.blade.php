@@ -92,7 +92,7 @@
                                 <button class="dropdown-item cancelAppointment" type="button" id="{{$appointment->id}}" href=""><i class="fa fa-close mr-2"></i> Cancel</button>
 
                                 <a class="dropdown-item" href="{{ route('appointments.edit',$appointment) }}"><i class="fa fa-edit mr-2"></i> Re-Schedule</a>
-                                <form action="{{ route('appointments.destroy',$appointment) }}" method="POST">
+                                <form action="{{ route('appointments.destroy',$appointment) }}" method="POST" onsubmit="return confirm('Are you sure , you want to delete this?')">
                                     @method('DELETE') 
                                     @csrf
                                     <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>

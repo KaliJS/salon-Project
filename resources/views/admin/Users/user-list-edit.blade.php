@@ -22,7 +22,7 @@
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">Update User</h4>
+                    <h4 class="card-title">Update Client</h4>
                   </div>
                   <div class="card-body">
                     

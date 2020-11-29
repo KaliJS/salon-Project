@@ -62,11 +62,11 @@
                             </div>
 
                             <div class="form-group row ">
-                              <label class="col-md-3 form-label">Skills</label>
+                              <label class="col-md-3 form-label">Services</label>
                               <div class="col-md-9">
                                 <select multiple class="form-control"  tabindex="-1" aria-hidden="true" name="skills[]">
                                   @foreach($skills as $skill)
-                                  <option value="{{$skill->id}}" {{$skill->id==Request::old('skill_id')?"selected":""}}>{{$skill->name}}</option>
+                                  <option value="{{$skill->id}}" {{$skill->id==Request::old('skill_id')?"selected":""}}>{{$skill->service_description}}</option>
                                   @endforeach
                                 </select>
                               </div>
@@ -82,7 +82,40 @@
                                 </select>
                               </div>
                             </div>
-                            
+
+
+                            <div class="form-group row ">
+                              <label class="col-md-3 form-label">Working Days</label>
+                              <div class="col-md-9">
+                                <select class="form-control" name="days[]" multiple tabindex="-1" aria-hidden="true">
+                                  <option value="" disabled>Select</option>
+                                  <option value="mon">Monday</option>
+                                  <option value="tue">Tuesday</option>
+                                  <option value="wed">Wednesday</option>
+                                  <option value="thu">Thursday</option>
+                                  <option value="fri">Friday</option>
+                                  <option value="sat">Saturday</option>
+                                  <option value="sun">Sanday</option>
+                                  
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 form-label">Shift Start Time</label>
+                                <div class="col-md-9">
+                                    <input class="form-control time" type="time" name="shift_start_time" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 form-label">Shift End Time</label>
+                                <div class="col-md-9">
+                                    <input class="form-control time" type="time" name="shift_end_time" required>
+                                </div>
+                            </div>
+
+
                             <div class="form-group row">
                               <label for="inputName" class="col-md-3 form-label">Employee Id</label>
                               <div class="col-md-9">

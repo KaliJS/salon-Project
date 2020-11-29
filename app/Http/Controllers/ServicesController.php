@@ -6,8 +6,6 @@ use App\Models\Services;
 use Illuminate\Http\Request;
 use App\Models\ServicesCategories;
 use App\Models\ServiceImage;
-use App\Models\ServicesSubCategories;
-use App\Models\ServicesPreSubCategories;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
@@ -39,9 +37,8 @@ class ServicesController extends Controller
     public function create()
     {
         $categories=ServicesCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        $subcategories=ServicesSubCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        $presubcategories=ServicesPreSubCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        return view('admin.Services.create-services',compact('categories','subcategories','presubcategories'));
+        
+        return view('admin.Services.create-services',compact('categories'));
     }
 
     /**
@@ -109,9 +106,8 @@ class ServicesController extends Controller
     public function edit(Services $service)
     {
         $categories=ServicesCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        $subcategories=ServicesSubCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        $presubcategories=ServicesPreSubCategories::where('branch_id',Auth::user()->branch_id)->get(['id','name']);
-        return view('admin.Services.edit-services',compact('service','categories','subcategories','presubcategories'));
+        
+        return view('admin.Services.edit-services',compact('service','categories'));
     }
 
     /**

@@ -121,11 +121,15 @@ class StaffDesignationController extends Controller
     }
 
     public function destroyDesignation(Request $request , $id){
+        \DB::beginTransaction();
         try{
             StaffDesignation::where('id', $id)->delete();
+            \DB::table('staff_users')->where('designation_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Designation Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

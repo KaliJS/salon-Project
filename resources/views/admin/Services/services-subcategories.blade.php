@@ -59,7 +59,7 @@
                                   <a href="https://laravel.spruko.com/admitro/Vertical-IconSidedar-Light/invoice-list#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" href="{{ url('/admin/services-subcategories/editSubCategory/'.$subcategory->id) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <form action="{{ url('/admin/services-subcategories/destroySubCategory/'.$subcategory->id) }}" method="POST">
+                                    <form action="{{ url('/admin/services-subcategories/destroySubCategory/'.$subcategory->id) }}" method="POST" onsubmit="return confirm('Are you sure , you want to delete this?')">
                                   
                                       @csrf
                                       <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>

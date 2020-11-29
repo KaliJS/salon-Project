@@ -104,6 +104,8 @@
                             <option value="staff-management" {{in_array("staff-management",$selected_permissions)?"selected":""}}>Staff Management</option>
                             <option value="services" {{in_array("services",$selected_permissions)?"selected":""}}>Services</option>
                             <option value="users/customer" {{in_array("users/customer",$selected_permissions)?"selected":""}}>Users/Customer</option>
+                            <option value="products" {{in_array("products",$selected_permissions)?"selected":""}}>Products</option>
+                            <option value="offers" {{in_array("offers",$selected_permissions)?"selected":""}}>Offers</option>
                           </select>
                         </div>
                       </div>

@@ -64,7 +64,7 @@
                       </div>
 
                       <div class="form-group row ">
-                        <label class="col-md-3 form-label">Skills</label>
+                        <label class="col-md-3 form-label">Services</label>
                         <div class="col-md-9">
                           <select multiple class="form-control"  tabindex="-1" aria-hidden="true" name="skills[]">
                             @foreach($skills as $skill)
@@ -83,6 +83,48 @@
                             @endforeach
                           </select>
                         </div>
+                      </div>
+
+                      <div class="form-group row ">
+                        <label class="col-md-3 form-label">Status</label>
+                        <div class="col-md-9">
+                          <select class="form-control" name="status" tabindex="-1" aria-hidden="true">
+                            <option value="" disabled>Select</option>
+                            <option value="1" {{$staff->status=='1'?'selected': ''}}>Active</option>
+                            <option value="0" {{$staff->status=='0'?'selected': ''}}>Not Active</option>                
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row ">
+                        <label class="col-md-3 form-label">Working Days</label>
+                        <div class="col-md-9">
+                          <select class="form-control" name="days[]" multiple tabindex="-1" aria-hidden="true">
+                            <option value="" disabled>Select</option>
+                            <option value="mon" {{in_array("mon",explode(',',$staff->days))?"selected":""}}>Monday</option>
+                            <option value="tue" {{in_array("tue",explode(',',$staff->days))?"selected":""}}>Tuesday</option>
+                            <option value="wed" {{in_array("wed",explode(',',$staff->days))?"selected":""}}>Wednesday</option>
+                            <option value="thu" {{in_array("thu",explode(',',$staff->days))?"selected":""}}>Thursday</option>
+                            <option value="fri" {{in_array("fri",explode(',',$staff->days))?"selected":""}}>Friday</option>
+                            <option value="sat" {{in_array("sat",explode(',',$staff->days))?"selected":""}}>Saturday</option>
+                            <option value="sun" {{in_array("sun",explode(',',$staff->days))?"selected":""}}>Sanday</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label class="col-md-3 form-label">Shift Start Time</label>
+                          <div class="col-md-9">
+                              <input class="form-control time" value="{{$staff->shift_start_time}}" type="time" name="shift_start_time" required>
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label class="col-md-3 form-label">Shift End Time</label>
+                          <div class="col-md-9">
+                              <input class="form-control time" value="{{$staff->shift_end_time}}" type="time" name="shift_end_time" required>
+                          </div>
                       </div>
 
                       <div class="form-group row">

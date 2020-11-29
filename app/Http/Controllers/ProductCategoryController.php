@@ -121,12 +121,15 @@ class ProductCategoryController extends Controller
     }
 
     public function destroyCategory(Request $request , $id){
+        \DB::beginTransaction();
         try{
             ProductCategory::where('id', $id)->delete();
             DB::table('products')->where('category_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Category Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

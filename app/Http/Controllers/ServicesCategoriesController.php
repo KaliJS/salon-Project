@@ -16,10 +16,8 @@ class ServicesCategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {      
         try{
-
             $categories = ServicesCategories::orderBy('name')->get();
             return view('admin.Services.services-categories',compact('categories'));
 
@@ -34,10 +32,8 @@ class ServicesCategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-       
+    {     
         try{
-
             return view('admin.Services.create-services-categories');
 
         }catch(\Exception $e){
@@ -141,12 +137,15 @@ class ServicesCategoriesController extends Controller
     }
 
     public function destroyCategory(Request $request , $id){
+        \DB::beginTransaction();
         try{
             ServicesCategories::where('id', $id)->delete();
-            DB::table('service_sub_categories')->where('category_id',$id)->delete();
+            \DB::table('services')->where('category_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Category Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

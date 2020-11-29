@@ -121,12 +121,15 @@ class ProductsBrandsController extends Controller
     }
 
     public function destroyBrand(Request $request , $id){
+        \DB::beginTransaction();
         try{
             ProductsBrands::where('id', $id)->delete();
             DB::table('products')->where('brand_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Brand Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

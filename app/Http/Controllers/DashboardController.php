@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
+use App\Models\Appointments;
 use Illuminate\Http\Request;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -14,7 +16,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.Dashboard.index');
+        $appointments=Appointments::where('branch_id',Auth::user()->branch_id)->get();
+        $total_appointments = count($appointments);
+        return view('admin.Dashboard.index',compact('total_appointments'));
     }
 
     /**

@@ -80,7 +80,7 @@
                       <div class="form-group row">
                         <label class="col-md-3 form-label">Date</label>
                         <div class="col-md-9">
-                          <input class="form-control" value="{{$appointment->date}}" type="date" name="date" required>
+                          <input class="form-control date" value="{{$appointment->date}}" type="date" name="date" required>
                         </div>
                       </div>
 
@@ -145,12 +145,20 @@
             });
 
             $(document).on("change","#services",function(){
+              const checkDate=$("input[name=date]").val();
+                
+                if(!checkDate){
+                    $('#services').val('');
+                    alert("Please select date!");
+                    return;
+                }
+                const date=$("input[name=date]").val();
                 const service_ids=$(this).val();
                 console.log(service_ids);
                 $.ajax({
                     method:'POST',
                     url:`/admin/appointments/getServiceData`,
-                    data:{service_ids,"_token":"{{csrf_token()}}"}
+                    data:{service_ids,date,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
                     $(".service_details").html(response);
                     $("select").select2();
@@ -159,27 +167,71 @@
                 });
             });
 
-            $(document).on("change",".stylist_name",function(){
-                const me=$(this);
-                const stylist_id=me.val();
-                const id=me.parent().parent().attr("id");
-                const date=$("input[name=date]").val();
-                if(!date){
+            // $(document).on("change",".stylist_name",function(){
+            //     const me=$(this);
+            //     const stylist_id=me.val();
+            //     const id=me.parent().parent().attr("id");
+            //     const date=$("input[name=date]").val();
+            //     if(!date){
+            //         alert("Please select date!");
+            //         return;
+            //     }
+            //     $.ajax({
+            //         method:'POST',
+            //         url:`/admin/appointments/getStylistData`,
+            //         data:{stylist_id,date,"_token":"{{csrf_token()}}"}
+            //     }).then(response=>{
+            //         console.log('id',id);
+            //         $(`#${id} .bookedButtons`).html(response);
+            //     }).fail(error=>{
+            //         console.log('error',error);
+            //     });
+            // });
+
+
+            $(document).on("change",".time",function(){
+
+                const checkDate=$("input[name=date]").val();
+                
+                if(!checkDate){
+                    $('.time').val('');
                     alert("Please select date!");
                     return;
                 }
+
+                
+                const time=$(this).val();
+                
+                const date=$("input[name=date]").val(); 
+                const service_id=$(this).attr('id');
+
                 $.ajax({
                     method:'POST',
-                    url:`/admin/appointments/getStylistData`,
-                    data:{stylist_id,date,"_token":"{{csrf_token()}}"}
+                    url:`/admin/appointments/checkAppointmentBooked`,
+                    data:{service_id,date,time,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
-                    console.log('id',id);
-                    $(`#${id} .bookedButtons`).html(response);
+                  console.log(`#service_id${service_id}`);
+                  $(`#service_id${service_id}`).removeAttr('disabled');
+                  $(`#service_id${service_id}`).html(response);
+
                 }).fail(error=>{
                     console.log('error',error);
                 });
             });
 
+
+            function checkStylist(){
+              var returning=true;
+              $('.stylist_name').each(function(i, obj) { 
+                if(!$(this).val()){
+                  returning = false;
+                }
+               });
+              if(!returning){
+                alert("Please select the stylist!");
+              }
+              return returning;
+            }
 
             $(window).on("load",function(){
                 
@@ -195,6 +247,12 @@
                 }).fail(error=>{
                     console.log('error',error);
                 });
+            });
+
+
+
+            $(document).on("change",".date",function(){
+                $('.time').val('');
             });
         </script>
 

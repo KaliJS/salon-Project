@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\Appointments;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 use Redirect;
@@ -18,10 +19,10 @@ class CustomersController extends Controller
     public function index()
     {
         try{
-            $users = Customers::where('branch_id',Auth::user()->branch_id)->orderBy('name')->get();
+            $users = Customers::orderBy('name')->get();
             //return \Auth::user()->branch_id;
             return view('admin.Users.user-list', compact('users'));
-
+    
         }catch(\Exception $e){
             return Redirect::back()->with('error',$e->getMessage());
         }
@@ -143,11 +144,15 @@ class CustomersController extends Controller
     }
 
     public function destroyCustomer(Request $request , $id){
+        \DB::beginTransaction();
         try{
             Customers::where('id', $id)->delete();
+            Appointments::where('customer_id',$id)->delete();
+            \DB::commit();
             return Redirect::back()->with('success','Cutomer Deleted Successfully!');
     
         }catch(\Exception $e){
+            \DB::rollback();
             return Redirect::back()->with('error',$e->getMessage());
         }
     }

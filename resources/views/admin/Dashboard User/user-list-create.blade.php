@@ -77,13 +77,15 @@
                         <label class="col-md-3 form-label">Permission</label>
                         <div class="col-md-9">
                           <select class="form-control" name="permissions[]" multiple tabindex="-1" aria-hidden="true">
-                            <option value="" selected disabled>Select</option>
+                            <option value="" disabled>Select</option>
                             <option value="appointment">Appointment</option>
                             <option value="inventory">Inventory</option>
                             <option value="accounts">Accounts</option>
                             <option value="staff-management">Staff Management</option>
                             <option value="services">Services</option>
                             <option value="users/customer">Users/Customer</option>
+                            <option value="products">Products</option>
+                            <option value="offers">Offersr</option>
                           </select>
                         </div>
                       </div>

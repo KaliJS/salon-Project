@@ -13,6 +13,7 @@
     .bookedButtons button{
         margin:1%;
     }
+    
 </style>
 
 @stop
@@ -43,7 +44,7 @@
                     <h4 class="card-title">Create Appointment</h4>
                   </div>
                   <div class="card-body">
-                  <form class="form-horizontal" action="{{route('appointments.store')}}" method="POST">
+                  <form class="form-horizontal" action="{{route('appointments.store')}}" method="POST" onsubmit="return checkStylist()">
                       @csrf
                       <div class="form-group row">
                         <label for="inputName" class="col-md-3 form-label">Select Customer</label>
@@ -79,7 +80,7 @@
                       <div class="form-group row">
                         <label class="col-md-3 form-label">Date</label>
                         <div class="col-md-9">
-                          <input class="form-control" type="date" name="date" required>
+                          <input class="form-control date" type="date" name="date" required>
                         </div>
                       </div>
 
@@ -98,6 +99,7 @@
 
                       </div>
 
+                 
                       <div class="form-group mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
                           <button type="submit" class="btn btn-primary">Create</button>
@@ -141,12 +143,20 @@
             });
 
             $(document).on("change","#services",function(){
+                const checkDate=$("input[name=date]").val();
+                
+                if(!checkDate){
+                    $('#services').val('');
+                    alert("Please select date!");
+                    return;
+                }
+                const date=$("input[name=date]").val();
                 const service_ids=$(this).val();
                 console.log(service_ids);
                 $.ajax({
                     method:'POST',
                     url:`getServiceData`,
-                    data:{service_ids,"_token":"{{csrf_token()}}"}
+                    data:{service_ids,date,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
                     $(".service_details").html(response);
                     $("select").select2();
@@ -155,53 +165,78 @@
                 });
             });
 
-            $(document).on("change",".stylist_name",function(){
-                const me=$(this);
-                const stylist_id=me.val();
-                const id=me.parent().parent().attr("id");
-                const date=$("input[name=date]").val();
-                if(!date){
-                    alert("Please select date!");
-                    return;
-                }
-                $.ajax({
-                    method:'POST',
-                    url:`getStylistData`,
-                    data:{stylist_id,date,"_token":"{{csrf_token()}}"}
-                }).then(response=>{
-                    console.log('id',id);
-                    $(`#${id} .bookedButtons`).html(response);
-                }).fail(error=>{
-                    console.log('error',error);
-                });
-            });
+            // $(document).on("change",".stylist_name",function(){
+            //     const me=$(this);
+            //     const stylist_id=me.val();
+            //     const id=me.parent().parent().attr("id");
+            //     const date=$("input[name=date]").val();
+            //     if(!date){
+            //         alert("Please select date!");
+            //         return;
+            //     }
+            //     $.ajax({
+            //         method:'POST',
+            //         url:`getStylistData`,
+            //         data:{stylist_id,date,"_token":"{{csrf_token()}}"}
+            //     }).then(response=>{
+            //         console.log('id',id);
+            //         $(`#${id} .bookedButtons`).html(response);
+            //     }).fail(error=>{
+            //         console.log('error',error);
+            //     });
+            // });
 
 
 
 
             $(document).on("change",".time",function(){
-                const time=$(this).val();
-                const date=$("input[name=date]").val(); 
-                const staff=$(this).parent().parent().parent().find(".stylist_name").val();
-                if(!staff)
-                {
-                  alert('please select stylist');
-                  return;
+
+                const checkDate=$("input[name=date]").val();
+                
+                if(!checkDate){
+                    $('.time').val('');
+                    alert("Please select date!");
+                    return;
                 }
+
+                
+                const time=$(this).val();
+                
+                const date=$("input[name=date]").val(); 
+                const service_id=$(this).attr('id');
+
                 $.ajax({
                     method:'POST',
                     url:`checkAppointmentBooked`,
-                    data:{staff,date,time,"_token":"{{csrf_token()}}"}
+                    data:{service_id,date,time,"_token":"{{csrf_token()}}"}
                 }).then(response=>{
-                    if(response =='error')
-                    {
-                      alert('Time slot is already booked');
-                      $(this).val("");
-                    }
+                  console.log(`#service_id${service_id}`);
+                  $(`#service_id${service_id}`).removeAttr('disabled');
+                  $(`#service_id${service_id}`).html(response);
+
                 }).fail(error=>{
                     console.log('error',error);
                 });
             });
+
+
+            function checkStylist(){
+              var returning=true;
+              $('.stylist_name').each(function(i, obj) { 
+                if(!$(this).val()){
+                  returning = false;
+                }
+               });
+              if(!returning){
+                alert("Please select the stylist!");
+              }
+              return returning;
+            }
+
+            $(document).on("change",".date",function(){
+                $('.time').val('');
+            });
+            
         </script>
 
 @stop

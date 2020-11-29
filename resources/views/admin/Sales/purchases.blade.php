@@ -71,7 +71,7 @@
                                   <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                   <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" href="{{ route('sales-purchases.edit',$purchase) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
-                                    <form action="{{ route('sales-purchases.destroy',$purchase) }}" method="POST">
+                                    <form action="{{ route('sales-purchases.destroy',$purchase) }}" method="POST" onsubmit="return confirm('Are you sure , you want to delete this?')">
                                       @method('DELETE')
                                       @csrf
                                       <button type="submit" class="dropdown-item" href="#"><i class="fa fa-trash-o mr-2" aria-hidden="true"></i> Delete</button>

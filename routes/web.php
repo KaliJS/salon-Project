@@ -24,6 +24,7 @@ use App\Http\Controllers\ServicesCategoriesController;
 use App\Http\Controllers\ServicesSubCategoriesController;
 use App\Http\Controllers\ServicesPreSubCategoriesController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\QuickPaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,32 +36,32 @@ use App\Http\Controllers\ContactUsController;
 |
 */
 
-// Route::get('/', function () {
-//    // return view('welcome');
-//     If(Auth::check())
-//         {
-//             return redirect('/login');
-//         }else{
-//             return redirect('/login');
-//         }
+Route::get('/', function () {
+   // return view('welcome');
+    If(Auth::check())
+        {
+            return redirect('/login');
+        }else{
+            return redirect('/login');
+        }
+});
+
+// Route::get('/',function(){
+// 	return view('users.index');
+// });
+// Route::get('/about',function(){
+// 	return view('users.about');
+// });
+// Route::get('/gallery',function(){
+// 	return view('users.gallery');
+// });
+// Route::get('/services',function(){
+// 	return view('users.services');
 // });
 
-Route::get('/',function(){
-	return view('users.index');
-});
-Route::get('/about',function(){
-	return view('users.about');
-});
-Route::get('/gallery',function(){
-	return view('users.gallery');
-});
-Route::get('/services',function(){
-	return view('users.services');
-});
-
-Route::get('/covid',function(){
-	return view('users.covid');
-});
+// Route::get('/covid',function(){
+// 	return view('users.covid');
+// });
 
 Route::resource('/contact', ContactUsController::class);
 
@@ -88,6 +89,16 @@ Route::post('/sales-invoices/getAmountData',[SalesInvoicesController::class,'get
 Route::resource('/sales-invoices', SalesInvoicesController::class);
 
 /******************End Invoice*******************/
+
+/**************start quick-payment*****************/
+
+Route::post('/quick-payments/getAmountData',[QuickPaymentController::class,'getAmountData']);
+Route::resource('/quick-payments', QuickPaymentController::class);
+
+/***************end quick-payment******************/
+
+
+
 /******************Start Purchases*******************/
 
 Route::resource('/sales-purchases', SalesPurchasesController::class);
@@ -179,7 +190,7 @@ Route::resource('/staff', StaffController::class);
 
 /********************* Appointments Start ***************/
 
-Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
+//Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
 Route::post('/appointments/cancelAppointment',[AppointmentsController::class,'cancelAppointment']);
 Route::get('/appointments/completeAppointment/{id}',[AppointmentsController::class,'completeAppointment']);
 Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
