@@ -40,8 +40,7 @@
                           <th>Gender</th>
                           <!-- <th>Image</th> -->
                           <th>Category</th>
-                          <th>Sub Category</th>
-                          <th>Post Category</th>
+                          
                           <th>Add Price With CGST and SGST !8%</th>
                           <th>Time (In Minutes)</th>
                           <th>Description</th>
@@ -58,8 +57,7 @@
                             @endforeach
                           </td> -->
                           <td>{{$service->category->name}}</td>
-                          <td>{{$service->subcategory->name}}</td>
-                          <td>{{$service->presubcategory->name}}</td>
+                          
                           <td>{{$service->price}}</td>
                           <td>{{$service->service_time}}</td>
                           <td>{{$service->description}}</td>

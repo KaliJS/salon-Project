@@ -14,6 +14,7 @@ use App\Models\Staff;
 use App\Models\Offers;
 use Carbon\Carbon;
 use DB;
+use PDF;
 
 
 class SalesInvoicesController extends Controller
@@ -85,11 +86,14 @@ class SalesInvoicesController extends Controller
             $inserted_product=DB::table('invoices_products')->insert($data_product);
 
             $data_offer=[];
-            foreach($offers as $offer){
+            if($offers){
+                foreach($offers as $offer){
                 $data_offer[]=array('invoice_id'=>$inserted_invoice->id,'offer_id'=>$offer,'branch_id'=>$input['branch_id'],'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s"),'deleted_at'=>null);
-            }
-            $inserted_offer=DB::table('invoices_offers')->insert($data_offer);
+                }
+                $inserted_offer=DB::table('invoices_offers')->insert($data_offer);
 
+            }
+            
             DB::commit();
 
             return redirect()->back()
@@ -181,11 +185,16 @@ class SalesInvoicesController extends Controller
 
             $deleted_offers=DB::table('invoices_offers')->where('invoice_id',$sales_invoice->id)->delete();
 
+            if($offers){
+
             $data_offer=[];
-            foreach($offers as $offer){
+           
+                foreach($offers as $offer){
                 $data_offer[]=array('invoice_id'=>$sales_invoice->id,'offer_id'=>$offer,'branch_id'=>$input['branch_id'],'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s"),'deleted_at'=>null);
+                }
+                $inserted_offer=DB::table('invoices_offers')->insert($data_offer);
+
             }
-            $inserted_offer=DB::table('invoices_offers')->insert($data_offer);
 
             DB::commit();
 
@@ -235,12 +244,20 @@ class SalesInvoicesController extends Controller
         
         foreach($request->service_ids as $service_id){
 
-            $selected_offer[] = OfferService::with('offer','service')->where('service_id',$service_id)->first();
             $select_offer = OfferService::with('offer','service')->where('service_id',$service_id)->first();
-            //return $select_offer->service->price;
-            $amount+=$select_offer->service->price;
-            $final_amount+=$select_offer->service->price-$select_offer->offer->discount_percentage*$select_offer->service->price/100;
+            
+            $service = Services::find($service_id);
+            $amount+=$service->price;
+            if($select_offer){
+                    $selected_offer[] = $select_offer;
+                $final_amount+=$service->price-($select_offer->offer->discount_percentage*$select_offer->service->price/100);
+            }else{
+                $final_amount += $service->price;
+            }
+           
         }
+        
+
         $final_amount = $final_amount*$request->me;
         $amount = $amount*$request->me;
 
@@ -249,4 +266,16 @@ class SalesInvoicesController extends Controller
             return $view->render();
          
     }
+
+
+    public function generatePdf(Request $request , $id)
+    {
+
+        $data = SalesInvoices::where('id',$id)->with('customer','services')->first();
+         
+        $view =  view('admin.Sales.generatePdf',compact('data'));
+
+        return $view->render();
+    }
+    
 }

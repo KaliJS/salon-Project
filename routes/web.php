@@ -84,6 +84,8 @@ Route::resource('/dashboard-user', DashboardUserController::class);
 
 //Route::post('/appointments/getStylistData',[AppointmentsController::class,'getStylistData']);
 //Route::get('/appointments/getCustomerData', [AppointmentsController::class,'getCustomerData']);
+Route::get('/sales-invoices/generatePdf/{id}', [SalesInvoicesController::class, 'generatePdf']);
+
 Route::get('/sales-invoices/getCustomerData',[SalesInvoicesController::class,'getCustomerData']);
 Route::post('/sales-invoices/getAmountData',[SalesInvoicesController::class,'getAmountData']);
 Route::resource('/sales-invoices', SalesInvoicesController::class);
@@ -92,6 +94,7 @@ Route::resource('/sales-invoices', SalesInvoicesController::class);
 
 /**************start quick-payment*****************/
 
+Route::get('/quick-payments/generateQuickPdf/{id}', [QuickPaymentController::class, 'generateQuickPdf']);
 Route::post('/quick-payments/getAmountData',[QuickPaymentController::class,'getAmountData']);
 Route::resource('/quick-payments', QuickPaymentController::class);
 

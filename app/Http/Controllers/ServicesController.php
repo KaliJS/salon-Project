@@ -174,6 +174,9 @@ class ServicesController extends Controller
             DB::table('service_images')->where('service_id',$service->id)->delete();
             foreach($service_image as $image){
                 unlink(public_path().'/uploads/service/'.$image['image_url']);
+                //when uploaded to domain then use below code.
+                //unlink($_SERVER['DOCUMENT_ROOT'].'/uploads/service/'.$service_image->image_url);
+                
             }
             $service->delete();
             DB::commit();
@@ -207,7 +210,7 @@ class ServicesController extends Controller
     public function getDeleteSelectedImages(Request $request){
         
             try{
-                 $service_image = ServiceImage::where('id',$request->image_id)->first();
+                $service_image = ServiceImage::where('id',$request->image_id)->first();
                 DB::table('service_images')->where('id',$request->image_id)->delete();         
                 unlink(public_path().'/uploads/service/'.$service_image->image_url);
                 return 'success';

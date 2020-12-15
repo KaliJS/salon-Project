@@ -2,26 +2,7 @@
 
 @section('content')
 
-		
-
-    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/buttons.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/responsive.bootstrap4.min.css')}}">
-    <script type="text/javascript" src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.dataTables.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/responsive.bootstrap4.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/dataTables.buttons.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/dataTables.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/dataTables.responsive.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/buttons.bootstrap4.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/buttons.colVis.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/buttons.html5.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/buttons.print.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/pdfmaker.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jszip.min.js')}}"></script>
-
-
+	
             <!--/app header--> 
             <!--Page header-->
             <div class="page-header">
@@ -51,14 +32,6 @@
                       
                     </div>
                     <div  id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-
-                      <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                          <div class="dt-buttons btn-group">
-                               
-                          </div>
-                        </div>
-                      </div>
 
                       <div class="table-responsive">
                         <table  id="example" class="table table-bordered text-nowrap key-buttons dataTable no-footer dtr-inline" role="grid" aria-describedby="example_info" style="width: 1152px;">
@@ -108,6 +81,9 @@
                                       <a href="#" class="btn btn-light btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
                                       <div class="dropdown-menu" style="">
                                         <a class="dropdown-item" href="{{ route('quick-payments.edit',$invoice) }}"><i class="fa fa-edit mr-2"></i> Edit</a>
+
+                                        <button class="dropdown-item generateQuickPdf" id="{{$invoice->id}}" class="btnprn"><i class="fa fa-download mr-2"></i> Generate Invoice</button>
+
                                         <form action="{{ route('quick-payments.destroy',$invoice) }}" method="POST" onsubmit="return confirm('Are you sure , you want to delete this?')">
                                           @method('DELETE')
                                           @csrf
@@ -141,3 +117,29 @@
 
 @stop
   
+
+@section('js')
+
+       <script type="text/javascript">
+          $(document).on("click",".generateQuickPdf",function(){
+                const el = this;
+                const id=this.id;
+                $.ajax({
+                   
+                    url:`/admin/quick-payments/generateQuickPdf/`+id
+                 
+                }).then(response=>{
+                    if(response){
+                      var printWindow = window.open('', '', 'height=604,width=702');  
+                       printWindow.document.write(response);  
+                       printWindow.document.close();  
+                       printWindow.print();  
+                           
+                    }
+                }).fail(error=>{
+                    console.log('error',error);
+                });
+            });
+       </script>
+
+@stop

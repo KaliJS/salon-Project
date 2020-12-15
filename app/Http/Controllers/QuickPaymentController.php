@@ -223,18 +223,35 @@ class QuickPaymentController extends Controller
         
         foreach($request->service_ids as $service_id){
 
-            $selected_offer[] = OfferService::with('offer','service')->where('service_id',$service_id)->first();
             $select_offer = OfferService::with('offer','service')->where('service_id',$service_id)->first();
-            //return $select_offer->service->price;
-            $amount+=$select_offer->service->price;
-            $final_amount+=$select_offer->service->price-$select_offer->offer->discount_percentage*$select_offer->service->price/100;
+            
+            $service = Services::find($service_id);
+            $amount+=$service->price;
+            if($select_offer){
+                    $selected_offer[] = $select_offer;
+                $final_amount+=$service->price-($select_offer->offer->discount_percentage*$select_offer->service->price/100);
+            }else{
+                $final_amount += $service->price;
+            }
+           
         }
+        
+
         $final_amount = $final_amount*$request->me;
         $amount = $amount*$request->me;
-
 
         $view=view('admin.Sales.get_total_amount',compact('selected_offer','final_amount','amount'));
             return $view->render();
          
+    }
+
+    public function generateQuickPdf(Request $request , $id)
+    {
+
+        $data = QuickPayment::where('id',$id)->with('services')->first();
+         
+        $view =  view('admin.Sales.generateQuickPdf',compact('data'));
+
+        return $view->render();
     }
 }

@@ -660,100 +660,11 @@
 @yield('css')
   <body class="app sidebar-mini">
 
-    <!-- Start Switcher -->
-    <div class="switcher-wrapper">
-      <div class="demo_changer" style="right: -255px;">
-        <div class="demo-icon bg_dark"><i class="fa fa-cog fa-spin  text_primary"></i></div>
-        <div class="form_holder switcher-sidebar ps ps--active-y">
-          <div class="row">
-            <div class="predefined_styles">
-              <div class="swichermainleft">
-                <h4>Skin Modes</h4>
-                <div class="switch_section">
-                  <div class="switch-toggle d-flex">
-                    <span class="mr-auto">Default  Mode</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch3" class="onoffswitch2-checkbox" checked="">
-                      <label for="myonoffswitch3" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                  <div class="switch-toggle d-flex">
-                    <span class="mr-auto">Dark Mode</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch14" class="onoffswitch2-checkbox">
-                      <label for="myonoffswitch14" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="swichermainleft">
-                <h4>Header Styles Mode</h4>
-                <div class="switch_section">
-                  <div class="switch-toggle d-flex light-switcher">
-                    <span class="mr-auto">Light Menu</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch10" class="onoffswitch2-checkbox">
-                      <label for="myonoffswitch10" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                  <div class="switch-toggle d-flex dark-switcher">
-                    <span class="mr-auto">Dark Menu</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch13" class="onoffswitch2-checkbox">
-                      <label for="myonoffswitch13" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                  <div class="switch-toggle d-flex">
-                    <span class="mr-auto">Color Menu</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch11" class="onoffswitch2-checkbox">
-                      <label for="myonoffswitch11" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                  <div class="switch-toggle d-flex">
-                    <span class="mr-auto">Graident Menu</span>
-                    <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch12" class="onoffswitch2-checkbox">
-                      <label for="myonoffswitch12" class="onoffswitch2-label"></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="skin-theme-switcher">
-                <div class="swichermainleft">
-                  <h4>Leftmenu Styles Mode</h4>
-                  <div class="switch_section">
-                    <div class="switch-toggle d-flex light-switcher">
-                      <span class="mr-auto">Light Menu</span>
-                      <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch1" class="onoffswitch2-checkbox">
-                        <label for="myonoffswitch1" class="onoffswitch2-label"></label>
-                      </div>
-                    </div>
-                    <div class="switch-toggle d-flex dark-switcher">
-                      <span class="mr-auto">Dark Menu</span>
-                      <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch2" class="onoffswitch2-checkbox">
-                        <label for="myonoffswitch2" class="onoffswitch2-label"></label>
-                      </div>
-                    </div>
-                    <div class="switch-toggle d-flex">
-                      <span class="mr-auto">Color Menu</span>
-                      <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch" class="onoffswitch2-checkbox">
-                        <label for="myonoffswitch" class="onoffswitch2-label"></label>
-                      </div>
-                    </div>
-                    <div class="switch-toggle d-flex">
-                      <span class="mr-auto">Gradient-Color Menu</span>
-                      <div class="onoffswitch2"><input type="radio" name="onoffswitch2" id="myonoffswitch5" class="onoffswitch2-checkbox">
-                        <label for="myonoffswitch5" class="onoffswitch2-label"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 657px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 528px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 657px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 528px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 657px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 528px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 657px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 528px;"></div></div></div>
-      </div>
-    </div>
-    <!-- End Switcher -->
+    
+    
 
     <!---Global-loader-->
-    <div id="global-loader" style="display: none;">
+    <div id="global-loader">
       <img src="{{asset('users/images/loader.svg')}}" alt="loader">
     </div>
     <!--- End Global-loader-->

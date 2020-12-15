@@ -23,12 +23,7 @@ class Services extends Model
     public function category(){
     	return $this->hasOne('App\Models\ServicesCategories','id','category_id');
     }
-    public function subcategory(){
-    	return $this->hasOne('App\Models\ServicesSubCategories','id','sub_category_id');
-    }
-    public function presubcategory(){
-    	return $this->hasOne('App\Models\ServicesPreSubCategories','id','pre_sub_category_id');
-    }
+
     public function images(){
     	return $this->hasMany('App\Models\ServiceImage','service_id','id');
     }
